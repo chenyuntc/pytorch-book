@@ -1,0 +1,5 @@
+git+https://github.com/pytorch/tnt.git@master
+fire
+numpy
+torchvision
+visdom
