@@ -88,7 +88,7 @@ python main.py train
 
 
 部分效果图
-![img](http://p04trddp4.bkt.clouddn.com/caption-results.png)
+![img](img/caption-results.png)
 
 ### 兼容性测试
 

@@ -67,7 +67,7 @@ python main.py stylize  --model-path='transformer.pth' \
    
 ```
 部分风格迁移的结果：
-![imgs](http://pytorch-1252820389.cosbj.myqcloud.com/imgs/neural-style-results.png)
+![imgs](neural-style-results.png)
 
 
 如果需要训练其它风格的图片，只需要修改`--style-path`对应的风格图片。
