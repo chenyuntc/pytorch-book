@@ -4,7 +4,7 @@
 ## 内容
 
 该书（教程/仓库）的内容如图所示：
-![思维导图](http://pytorch-1252820389.cosbj.myqcloud.com/imgs/mindmap.png)
+![思维导图](http://7zh43r.com2.z0.glb.clouddn.com/del/mindmap.png)
 
 可以看出本教程可以分为两部分：
 
