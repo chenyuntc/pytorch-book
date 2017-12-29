@@ -33,6 +33,7 @@ python data_preprocess.py process --annotation-file=/data/annotation.json --max-
 ```Bash
 python feature_extract.py
 ```
+
 **注意修改`config.py`中的`img_path`**，一般是`ai_challenger_caption_train_20170902/caption_train_images_20170902/`
 
 这里使用的是resnet50，提取图片特征。提取完成之后，会在当前文件夹生成`results.pth`, `results.pth`保存着一个tensor数组，形如（21w X 2048），保存着21w张图片的特征信息。
@@ -88,6 +89,7 @@ python main.py train
 
 
 部分效果图
+
 ![img](img/caption-results.png)
 
 ### 兼容性测试
