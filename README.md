@@ -94,4 +94,10 @@
 - ....
 
 
+## ^_^
+
+有任何bug，解释不清楚的地方或者是困惑，欢迎开issue
+
+欢迎pull requests
+
 Happy Coding!
