@@ -1,10 +1,8 @@
-本实验利用PyTorch实现了图像描述Image Caption。
+这是电子工业出版社的《深度学习框架PyTorch：入门与实战》第十章的配套代码，利用PyTorch实现了图像描述Image Caption。
 
 ## 1 下载数据
 
 本次实验的数据来自于[AI Challenger图像描述](https://challenger.ai/competition/caption/)。 请下载对应的训练数据。如果你只是想测试看看效果，可以跳过这一步。
-
-# TODO  requirements.txt
 
 ## 2 环境配置
 
