@@ -1,6 +1,6 @@
-这是电子工业出版社的《深度学习框架PyTorch：入门与实战》第九章的配套代码，利用PyTorch实现了CharRNN用以写唐诗。
+这是电子工业出版社的《深度学习框架PyTorch：入门与实践》第九章的配套代码，利用PyTorch实现了CharRNN用以写唐诗。
 
-本次实验的数据来自于[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)。但是作者已经进行处理成，二进制文件`tang.npz`，可以直接使用。读者可以[点此](http://pytorch-1252820389.cosbj.myqcloud.com/tang.npz)下载`tang.npz`
+本次实验的数据来自于[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)。但是作者已经进行处理成二进制文件`tang.npz`，可以直接使用。读者可以[点此](http://pytorch-1252820389.cosbj.myqcloud.com/tang.npz)下载`tang.npz`
 
 ## 环境配置
 - 安装[PyTorch](http://pytorch.org)
