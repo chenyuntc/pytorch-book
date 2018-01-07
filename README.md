@@ -1,6 +1,9 @@
 这是书籍《深度学习框架PyTorch：入门与实践》的对应代码，但是也可以作为一个独立的PyTorch入门指南和教程。
 
+![](http://img14.360buyimg.com/n1/jfs/t13339/32/2463730198/217483/e8148c6b/5a41277dNbd1470c1.jpg)
 
+- [京东链接（暂时无货）](https://item.jd.com/12261129.html)
+- [当当（￥51, 包邮现货）](http://product.dangdang.com/25208778.html)
 ## 内容
 
 该书（教程/仓库）的内容如图所示：
