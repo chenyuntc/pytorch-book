@@ -192,7 +192,6 @@ def gen(**kwargs):
 
     for k,v in kwargs.items():
         setattr(opt,k,v)
-
     data,word2ix,ix2word = get_data(opt)
     model = PoetryModel(len(word2ix), 128, 256);
     map_location = lambda s,l:s
@@ -202,8 +201,12 @@ def gen(**kwargs):
     if opt.use_gpu:
         model.cuda()
     if sys.version_info.major == 3:
-        start_words = opt.start_words.encode('ascii', 'surrogateescape').decode('utf8')
-        prefix_words = opt.prefix_words.encode('ascii', 'surrogateescape').decode('utf8') if opt.prefix_words else None
+        if opt.start_words.isprintable():
+             start_words = opt.start_words
+             prefix_words = opt.prefix_words if opt.prefix_words else None
+        else:
+            start_words = opt.start_words.encode('ascii', 'surrogateescape').decode('utf8')
+            prefix_words = opt.prefix_words.encode('ascii', 'surrogateescape').decode('utf8') if opt.prefix_words else None
     else:
         start_words = opt.start_words.decode('utf8')
         prefix_words = opt.prefix_words.decode('utf8') if opt.prefix_words else None
