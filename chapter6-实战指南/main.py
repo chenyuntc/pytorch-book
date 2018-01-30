@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader
 from torch.autograd import Variable
 from torchnet import meter
 from utils.visualize import Visualizer
+from tqdm import tqdm
 
 def test(**kwargs):
     opt.parse(kwargs)
@@ -23,7 +24,7 @@ def test(**kwargs):
     train_data = DogCat(opt.test_data_root,test=True)
     test_dataloader = DataLoader(train_data,batch_size=opt.batch_size,shuffle=False,num_workers=opt.num_workers)
     results = []
-    for ii,(data,path) in enumerate(test_dataloader):
+    for ii,(data,path) in tqdm(enumerate(test_dataloader)):
         input = t.autograd.Variable(data,volatile = True)
         if opt.use_gpu: input = input.cuda()
         score = model(input)
@@ -78,7 +79,7 @@ def train(**kwargs):
         loss_meter.reset()
         confusion_matrix.reset()
 
-        for ii,(data,label) in enumerate(train_dataloader):
+        for ii,(data,label) in tqdm(enumerate(train_dataloader)):
 
             # train model 
             input = Variable(data)
@@ -132,7 +133,7 @@ def val(model,dataloader):
     '''
     model.eval()
     confusion_matrix = meter.ConfusionMeter(2)
-    for ii, data in enumerate(dataloader):
+    for ii, data in tqdm(enumerate(dataloader)):
         input, label = data
         val_input = Variable(input, volatile=True)
         val_label = Variable(label.type(t.LongTensor), volatile=True)

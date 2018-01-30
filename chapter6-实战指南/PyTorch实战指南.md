@@ -721,7 +721,6 @@ class DefaultConfig(object):
 # 训练模型
 python main.py train 
         --train-data-root=data/train/ 
-        --load-model-path='checkpoints/resnet34_16:53:00.pth' 
         --lr=0.005 
         --batch-size=32 
         --model='ResNet34'  
