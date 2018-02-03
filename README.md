@@ -67,35 +67,43 @@
    ```
 
 ## Visdom打不开及其解决方案
+**新版的visdom已经解决了这个问题,只需要运行**
+```
+pip install --upgrade visdom
+```
 
-教程中用到了Visdom作为可视化工具，但是最近发现visdom 不能用了，打开之后网页一片空白，经过抓包分析发现是两个js文件被防火墙给阻挡了：
+########################## deprecated ####################################
+
+~~教程中用到了Visdom作为可视化工具，但是最近发现visdom 不能用了，打开之后网页一片空白，经过抓包分析发现是两个js文件被防火墙给阻挡了：
 
 - `https://cdn.rawgit.com/plotly/plotly.js/master/dist/plotly.min.js`
 - `https://cdn.rawgit.com/STRML/react-grid-layout/0.14.0/dist/react-grid-layout.min.js`
 
-这里本人提供一个比较简单的解决方法：
+~~这里本人提供一个比较简单的解决方法：
 - Step 1： 找到系统使用visdom的`index.html`文件，
 
   ```Bash
   locate visdom/static/index.html
   ```
 
-  输出 系统中visdom 的html文件：
+ ~~输出 系统中visdom 的html文件：
 
   ```Bash
   /usr/local/lib/python2.7/dist-packages/visdom/static/index.html
   /usr/local/lib/python3.5/dist-packages/visdom/static/index.html
   ```
 
-- Step 2：下载[本人修改过后的文件](http://pytorch-1252820389.cosbj.myqcloud.com/visdom/index.html)，替换`step1` 找到的`index.html`, 可能需要root权限。
+- ~~Step 2：下载[本人修改过后的文件](http://pytorch-1252820389.cosbj.myqcloud.com/visdom/index.html)，替换`step1` 找到的`index.html`, 可能需要root权限。
 
-这时候再刷新浏览器，就能发现visdom正常显示了。
+~~这时候再刷新浏览器，就能发现visdom正常显示了。
 
-还有其它的解决方法，包括：
+~~还有其它的解决方法，包括：
 - 下载这两个文件到本地，然后修改index.html中都应js文件的路径
 - 使用代理，但是把某些域名加入白名单
 - ....
+~~
 
+########################## deprecated ####################################
 
 ## ^_^
 
