@@ -46,7 +46,12 @@
 
 - 教程代码同时在Python2和Python3下测试通过
 - 实战部分代码还同时在GPU和CPU环境下测试通过
-- 所有的代码都是基于最新版的PyTorch 0.2.0，本人承诺会至少维护代码更新兼容到PyTorch `0.4`
+- ~~所有的代码都是基于最新版的PyTorch 0.2.0~~，本人承诺会至少维护代码更新兼容到PyTorch `0.4`
+
+目前前五章的代码已经更新到PyTorch 0.3.0 , 如果你想在PyTorch 0.2.0下运行,请 
+```
+git checkout v0.2
+```
 
 如果有任何不当，或者有待改进的地方，欢迎读者开issue讨论，或者提交pull request。
 
@@ -74,12 +79,12 @@ pip install --upgrade visdom
 
 ########################## deprecated ####################################
 
-~~教程中用到了Visdom作为可视化工具，但是最近发现visdom 不能用了，打开之后网页一片空白，经过抓包分析发现是两个js文件被防火墙给阻挡了：
+~~教程中用到了Visdom作为可视化工具，但是最近发现visdom 不能用了，打开之后网页一片空白，经过抓包分析发现是两个js文件被防火墙给阻挡了~~：
 
 - `https://cdn.rawgit.com/plotly/plotly.js/master/dist/plotly.min.js`
 - `https://cdn.rawgit.com/STRML/react-grid-layout/0.14.0/dist/react-grid-layout.min.js`
 
-~~这里本人提供一个比较简单的解决方法：
+~~这里本人提供一个比较简单的解决方法：~~
 - Step 1： 找到系统使用visdom的`index.html`文件，
 
   ```Bash
