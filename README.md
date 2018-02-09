@@ -72,7 +72,7 @@ git checkout v0.2
    ```
 
 ## Visdom打不开及其解决方案
-**新版的visdom已经解决了这个问题,只需要运行**
+**新版的visdom已经解决了这个问题,只需要升级即可**
 ```
 pip install --upgrade visdom
 ```
@@ -91,22 +91,16 @@ pip install --upgrade visdom
   locate visdom/static/index.html
   ```
 
- ~~输出 系统中visdom 的html文件：
+ ~~输出 系统中visdom 的html文件：~~
 
   ```Bash
   /usr/local/lib/python2.7/dist-packages/visdom/static/index.html
   /usr/local/lib/python3.5/dist-packages/visdom/static/index.html
   ```
 
-- ~~Step 2：下载[本人修改过后的文件](http://pytorch-1252820389.cosbj.myqcloud.com/visdom/index.html)，替换`step1` 找到的`index.html`, 可能需要root权限。
+- ~~Step 2：下载[本人修改过后的文件](http://pytorch-1252820389.cosbj.myqcloud.com/visdom/index.html)，替换`step1` 找到的`index.html`, 可能需要root权限。~~
 
-~~这时候再刷新浏览器，就能发现visdom正常显示了。
-
-~~还有其它的解决方法，包括：
-- 下载这两个文件到本地，然后修改index.html中都应js文件的路径
-- 使用代理，但是把某些域名加入白名单
-- ....
-~~
+~~这时候再刷新浏览器，就能发现visdom正常显示了。~~
 
 ########################## deprecated ####################################
 
