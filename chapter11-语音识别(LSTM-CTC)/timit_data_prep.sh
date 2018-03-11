@@ -11,6 +11,7 @@ fi
 
 conf_dir=`pwd`/conf
 prepare_dir=`pwd`/data_prepare
+log_dir=`pwd`/log
 
 [ -f $conf_dir/test_spk.list ] || error_exit "$PROG: Eval-set speaker list not found.";
 [ -f $conf_dir/dev_spk.list ] || error_exit "$PROG: dev-set speaker list not found.";
@@ -22,7 +23,7 @@ test_dir=test
 ls -d "$*"/$train_dir/dr*/* | sed -e "s:^.*/::" > $conf_dir/train_spk.list
 
 tmpdir=`pwd`/tmp
-mkdir -p $tmpdir
+mkdir -p $tmpdir $prepare_dir $log_dir
 for x in train dev test; do
   # 只使用 si & sx 的语音.
   find $*/{$train_dir,$test_dir} -not \( -iname 'SA*' \) -iname '*.WAV' \
