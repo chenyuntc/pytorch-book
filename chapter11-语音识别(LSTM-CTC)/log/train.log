@@ -1,0 +1,573 @@
+2018-03-10 22:02:07,730 train.py[line:157] INFO Model Structure:
+2018-03-10 22:02:07,731 train.py[line:160] INFO 0->Sequential(
+  (0): BatchRNN(
+    (rnn): LSTM(201, 256, bias=False, bidirectional=True)
+  )
+  (1): BatchRNN(
+    (batch_norm): SequenceWise (
+    BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True))
+    (rnn): LSTM(512, 256, bias=False, bidirectional=True)
+  )
+  (2): BatchRNN(
+    (batch_norm): SequenceWise (
+    BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True))
+    (rnn): LSTM(512, 256, bias=False, bidirectional=True)
+  )
+  (3): BatchRNN(
+    (batch_norm): SequenceWise (
+    BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True))
+    (rnn): LSTM(512, 256, bias=False, bidirectional=True)
+  )
+)
+2018-03-10 22:02:07,731 train.py[line:160] INFO 1->SequenceWise (
+Sequential(
+  (0): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True)
+  (1): Linear(in_features=512, out_features=29)
+))
+2018-03-10 22:02:07,731 train.py[line:160] INFO 2->BatchSoftmax(
+)
+2018-03-10 22:02:11,091 train.py[line:231] INFO Start training epoch: 1, learning_rate: 0.00100
+2018-03-10 22:02:19,655 train.py[line:53] DEBUG batch = 20, loss = 280.6995
+2018-03-10 22:02:27,396 train.py[line:53] DEBUG batch = 40, loss = 150.9045
+2018-03-10 22:02:35,457 train.py[line:53] DEBUG batch = 60, loss = 146.0204
+2018-03-10 22:02:43,426 train.py[line:53] DEBUG batch = 80, loss = 142.5238
+2018-03-10 22:02:51,349 train.py[line:53] DEBUG batch = 100, loss = 140.9461
+2018-03-10 22:02:59,427 train.py[line:53] DEBUG batch = 120, loss = 143.1465
+2018-03-10 22:03:07,437 train.py[line:53] DEBUG batch = 140, loss = 137.7505
+2018-03-10 22:03:15,200 train.py[line:53] DEBUG batch = 160, loss = 139.3170
+2018-03-10 22:03:23,393 train.py[line:53] DEBUG batch = 180, loss = 140.4819
+2018-03-10 22:03:31,388 train.py[line:53] DEBUG batch = 200, loss = 137.7753
+2018-03-10 22:03:39,558 train.py[line:53] DEBUG batch = 220, loss = 139.1904
+2018-03-10 22:03:44,041 train.py[line:64] INFO Epoch done, average loss: 153.2605
+2018-03-10 22:03:49,679 train.py[line:237] INFO loss on dev set is 134.1542
+2018-03-10 22:03:49,682 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:03:49,682 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:03:49,682 train.py[line:279] INFO epoch 1 done, dev acc is: 21.3837, time_used: 1.6432 minutes
+2018-03-10 22:03:49,909 train.py[line:231] INFO Start training epoch: 2, learning_rate: 0.00100
+2018-03-10 22:03:58,298 train.py[line:53] DEBUG batch = 20, loss = 138.9624
+2018-03-10 22:04:06,136 train.py[line:53] DEBUG batch = 40, loss = 131.5423
+2018-03-10 22:04:14,025 train.py[line:53] DEBUG batch = 60, loss = 134.8908
+2018-03-10 22:04:22,578 train.py[line:53] DEBUG batch = 80, loss = 136.0870
+2018-03-10 22:04:30,280 train.py[line:53] DEBUG batch = 100, loss = 132.3976
+2018-03-10 22:04:38,048 train.py[line:53] DEBUG batch = 120, loss = 136.6042
+2018-03-10 22:04:46,036 train.py[line:53] DEBUG batch = 140, loss = 137.2630
+2018-03-10 22:04:53,941 train.py[line:53] DEBUG batch = 160, loss = 135.0054
+2018-03-10 22:05:01,848 train.py[line:53] DEBUG batch = 180, loss = 130.4788
+2018-03-10 22:05:09,774 train.py[line:53] DEBUG batch = 200, loss = 128.4451
+2018-03-10 22:05:17,772 train.py[line:53] DEBUG batch = 220, loss = 130.6855
+2018-03-10 22:05:22,156 train.py[line:64] INFO Epoch done, average loss: 133.6493
+2018-03-10 22:05:27,786 train.py[line:237] INFO loss on dev set is 129.5344
+2018-03-10 22:05:27,792 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:05:27,792 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:05:27,792 train.py[line:279] INFO epoch 2 done, dev acc is: 20.1063, time_used: 3.2783 minutes
+2018-03-10 22:05:27,830 train.py[line:231] INFO Start training epoch: 3, learning_rate: 0.00100
+2018-03-10 22:05:35,892 train.py[line:53] DEBUG batch = 20, loss = 136.5877
+2018-03-10 22:05:44,161 train.py[line:53] DEBUG batch = 40, loss = 136.4160
+2018-03-10 22:05:52,172 train.py[line:53] DEBUG batch = 60, loss = 128.4943
+2018-03-10 22:06:00,168 train.py[line:53] DEBUG batch = 80, loss = 129.7584
+2018-03-10 22:06:07,862 train.py[line:53] DEBUG batch = 100, loss = 129.2367
+2018-03-10 22:06:15,784 train.py[line:53] DEBUG batch = 120, loss = 129.4118
+2018-03-10 22:06:23,560 train.py[line:53] DEBUG batch = 140, loss = 126.6387
+2018-03-10 22:06:31,769 train.py[line:53] DEBUG batch = 160, loss = 125.1146
+2018-03-10 22:06:39,729 train.py[line:53] DEBUG batch = 180, loss = 125.4431
+2018-03-10 22:06:47,620 train.py[line:53] DEBUG batch = 200, loss = 125.0185
+2018-03-10 22:06:55,556 train.py[line:53] DEBUG batch = 220, loss = 125.2609
+2018-03-10 22:07:00,314 train.py[line:64] INFO Epoch done, average loss: 128.9296
+2018-03-10 22:07:06,111 train.py[line:237] INFO loss on dev set is 121.5772
+2018-03-10 22:07:06,114 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:07:06,114 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:07:06,114 train.py[line:279] INFO epoch 3 done, dev acc is: 25.5649, time_used: 4.9170 minutes
+2018-03-10 22:07:06,144 train.py[line:231] INFO Start training epoch: 4, learning_rate: 0.00100
+2018-03-10 22:07:14,100 train.py[line:53] DEBUG batch = 20, loss = 118.5779
+2018-03-10 22:07:22,277 train.py[line:53] DEBUG batch = 40, loss = 123.1842
+2018-03-10 22:07:30,108 train.py[line:53] DEBUG batch = 60, loss = 117.5061
+2018-03-10 22:07:38,217 train.py[line:53] DEBUG batch = 80, loss = 117.5467
+2018-03-10 22:07:46,186 train.py[line:53] DEBUG batch = 100, loss = 118.0902
+2018-03-10 22:07:54,134 train.py[line:53] DEBUG batch = 120, loss = 117.8513
+2018-03-10 22:08:02,165 train.py[line:53] DEBUG batch = 140, loss = 114.7837
+2018-03-10 22:08:10,028 train.py[line:53] DEBUG batch = 160, loss = 112.2615
+2018-03-10 22:08:18,013 train.py[line:53] DEBUG batch = 180, loss = 111.2934
+2018-03-10 22:08:25,978 train.py[line:53] DEBUG batch = 200, loss = 109.0160
+2018-03-10 22:08:33,924 train.py[line:53] DEBUG batch = 220, loss = 107.2205
+2018-03-10 22:08:38,420 train.py[line:64] INFO Epoch done, average loss: 114.6993
+2018-03-10 22:08:44,231 train.py[line:237] INFO loss on dev set is 103.2085
+2018-03-10 22:08:44,234 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:08:44,234 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:08:44,234 train.py[line:279] INFO epoch 4 done, dev acc is: 34.9793, time_used: 6.5524 minutes
+2018-03-10 22:08:44,264 train.py[line:231] INFO Start training epoch: 5, learning_rate: 0.00100
+2018-03-10 22:08:52,306 train.py[line:53] DEBUG batch = 20, loss = 106.5602
+2018-03-10 22:09:00,373 train.py[line:53] DEBUG batch = 40, loss = 102.3870
+2018-03-10 22:09:08,367 train.py[line:53] DEBUG batch = 60, loss = 102.2038
+2018-03-10 22:09:16,264 train.py[line:53] DEBUG batch = 80, loss = 102.0309
+2018-03-10 22:09:24,375 train.py[line:53] DEBUG batch = 100, loss = 101.8823
+2018-03-10 22:09:32,639 train.py[line:53] DEBUG batch = 120, loss = 98.3363
+2018-03-10 22:09:40,504 train.py[line:53] DEBUG batch = 140, loss = 95.6624
+2018-03-10 22:09:48,467 train.py[line:53] DEBUG batch = 160, loss = 93.2673
+2018-03-10 22:09:56,475 train.py[line:53] DEBUG batch = 180, loss = 97.3178
+2018-03-10 22:10:04,634 train.py[line:53] DEBUG batch = 200, loss = 95.3161
+2018-03-10 22:10:12,551 train.py[line:53] DEBUG batch = 220, loss = 92.7438
+2018-03-10 22:10:16,841 train.py[line:64] INFO Epoch done, average loss: 98.4108
+2018-03-10 22:10:22,653 train.py[line:237] INFO loss on dev set is 90.5294
+2018-03-10 22:10:22,656 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:10:22,656 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:10:22,656 train.py[line:279] INFO epoch 5 done, dev acc is: 41.5812, time_used: 8.1927 minutes
+2018-03-10 22:10:22,686 train.py[line:231] INFO Start training epoch: 6, learning_rate: 0.00100
+2018-03-10 22:10:30,282 train.py[line:53] DEBUG batch = 20, loss = 85.4391
+2018-03-10 22:10:38,486 train.py[line:53] DEBUG batch = 40, loss = 86.4091
+2018-03-10 22:10:46,446 train.py[line:53] DEBUG batch = 60, loss = 82.8372
+2018-03-10 22:10:54,603 train.py[line:53] DEBUG batch = 80, loss = 86.6443
+2018-03-10 22:11:02,361 train.py[line:53] DEBUG batch = 100, loss = 83.1814
+2018-03-10 22:11:10,156 train.py[line:53] DEBUG batch = 120, loss = 80.4308
+2018-03-10 22:11:18,296 train.py[line:53] DEBUG batch = 140, loss = 81.8694
+2018-03-10 22:11:26,452 train.py[line:53] DEBUG batch = 160, loss = 80.8175
+2018-03-10 22:11:34,695 train.py[line:53] DEBUG batch = 180, loss = 82.2908
+2018-03-10 22:11:42,589 train.py[line:53] DEBUG batch = 200, loss = 75.7507
+2018-03-10 22:11:50,278 train.py[line:53] DEBUG batch = 220, loss = 76.7966
+2018-03-10 22:11:54,935 train.py[line:64] INFO Epoch done, average loss: 81.9136
+2018-03-10 22:12:00,806 train.py[line:237] INFO loss on dev set is 80.8583
+2018-03-10 22:12:00,809 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:12:00,809 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:12:00,809 train.py[line:279] INFO epoch 6 done, dev acc is: 49.0741, time_used: 9.8286 minutes
+2018-03-10 22:12:00,841 train.py[line:231] INFO Start training epoch: 7, learning_rate: 0.00100
+2018-03-10 22:12:08,727 train.py[line:53] DEBUG batch = 20, loss = 73.6581
+2018-03-10 22:12:16,710 train.py[line:53] DEBUG batch = 40, loss = 75.1266
+2018-03-10 22:12:24,542 train.py[line:53] DEBUG batch = 60, loss = 70.8979
+2018-03-10 22:12:32,722 train.py[line:53] DEBUG batch = 80, loss = 75.4227
+2018-03-10 22:12:40,625 train.py[line:53] DEBUG batch = 100, loss = 73.4112
+2018-03-10 22:12:48,496 train.py[line:53] DEBUG batch = 120, loss = 74.2995
+2018-03-10 22:12:56,766 train.py[line:53] DEBUG batch = 140, loss = 72.2571
+2018-03-10 22:13:04,736 train.py[line:53] DEBUG batch = 160, loss = 72.7210
+2018-03-10 22:13:12,630 train.py[line:53] DEBUG batch = 180, loss = 71.7502
+2018-03-10 22:13:20,469 train.py[line:53] DEBUG batch = 200, loss = 69.9503
+2018-03-10 22:13:28,444 train.py[line:53] DEBUG batch = 220, loss = 70.1064
+2018-03-10 22:13:32,944 train.py[line:64] INFO Epoch done, average loss: 72.5665
+2018-03-10 22:13:38,786 train.py[line:237] INFO loss on dev set is 74.8404
+2018-03-10 22:13:38,788 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:13:38,788 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:13:38,788 train.py[line:279] INFO epoch 7 done, dev acc is: 52.9923, time_used: 11.4616 minutes
+2018-03-10 22:13:38,819 train.py[line:231] INFO Start training epoch: 8, learning_rate: 0.00100
+2018-03-10 22:13:46,776 train.py[line:53] DEBUG batch = 20, loss = 67.0311
+2018-03-10 22:13:54,665 train.py[line:53] DEBUG batch = 40, loss = 67.6779
+2018-03-10 22:14:02,730 train.py[line:53] DEBUG batch = 60, loss = 65.0198
+2018-03-10 22:14:10,485 train.py[line:53] DEBUG batch = 80, loss = 64.2585
+2018-03-10 22:14:18,158 train.py[line:53] DEBUG batch = 100, loss = 66.2314
+2018-03-10 22:14:26,105 train.py[line:53] DEBUG batch = 120, loss = 65.3841
+2018-03-10 22:14:34,092 train.py[line:53] DEBUG batch = 140, loss = 66.5858
+2018-03-10 22:14:42,483 train.py[line:53] DEBUG batch = 160, loss = 66.4088
+2018-03-10 22:14:50,774 train.py[line:53] DEBUG batch = 180, loss = 67.5547
+2018-03-10 22:14:58,501 train.py[line:53] DEBUG batch = 200, loss = 62.3818
+2018-03-10 22:15:06,459 train.py[line:53] DEBUG batch = 220, loss = 65.1634
+2018-03-10 22:15:11,223 train.py[line:64] INFO Epoch done, average loss: 65.7666
+2018-03-10 22:15:17,106 train.py[line:237] INFO loss on dev set is 71.0448
+2018-03-10 22:15:17,109 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:15:17,109 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:15:17,109 train.py[line:279] INFO epoch 8 done, dev acc is: 55.4613, time_used: 13.1003 minutes
+2018-03-10 22:15:17,139 train.py[line:231] INFO Start training epoch: 9, learning_rate: 0.00100
+2018-03-10 22:15:25,492 train.py[line:53] DEBUG batch = 20, loss = 61.7110
+2018-03-10 22:15:33,627 train.py[line:53] DEBUG batch = 40, loss = 60.1640
+2018-03-10 22:15:41,712 train.py[line:53] DEBUG batch = 60, loss = 62.8328
+2018-03-10 22:15:49,342 train.py[line:53] DEBUG batch = 80, loss = 60.5486
+2018-03-10 22:15:57,296 train.py[line:53] DEBUG batch = 100, loss = 59.7968
+2018-03-10 22:16:05,220 train.py[line:53] DEBUG batch = 120, loss = 62.5581
+2018-03-10 22:16:12,953 train.py[line:53] DEBUG batch = 140, loss = 60.8565
+2018-03-10 22:16:21,195 train.py[line:53] DEBUG batch = 160, loss = 58.3577
+2018-03-10 22:16:28,895 train.py[line:53] DEBUG batch = 180, loss = 59.5474
+2018-03-10 22:16:36,986 train.py[line:53] DEBUG batch = 200, loss = 58.8096
+2018-03-10 22:16:44,724 train.py[line:53] DEBUG batch = 220, loss = 60.1367
+2018-03-10 22:16:49,165 train.py[line:64] INFO Epoch done, average loss: 60.3640
+2018-03-10 22:16:55,018 train.py[line:237] INFO loss on dev set is 69.7359
+2018-03-10 22:16:55,021 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:16:55,021 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:16:55,021 train.py[line:279] INFO epoch 9 done, dev acc is: 55.8424, time_used: 14.7322 minutes
+2018-03-10 22:16:55,052 train.py[line:231] INFO Start training epoch: 10, learning_rate: 0.00100
+2018-03-10 22:17:03,020 train.py[line:53] DEBUG batch = 20, loss = 58.0579
+2018-03-10 22:17:11,003 train.py[line:53] DEBUG batch = 40, loss = 56.7168
+2018-03-10 22:17:18,542 train.py[line:53] DEBUG batch = 60, loss = 55.4443
+2018-03-10 22:17:26,371 train.py[line:53] DEBUG batch = 80, loss = 54.4024
+2018-03-10 22:17:34,502 train.py[line:53] DEBUG batch = 100, loss = 56.7364
+2018-03-10 22:17:42,325 train.py[line:53] DEBUG batch = 120, loss = 58.0297
+2018-03-10 22:17:50,488 train.py[line:53] DEBUG batch = 140, loss = 56.2250
+2018-03-10 22:17:58,421 train.py[line:53] DEBUG batch = 160, loss = 55.2327
+2018-03-10 22:18:06,343 train.py[line:53] DEBUG batch = 180, loss = 55.8058
+2018-03-10 22:18:14,740 train.py[line:53] DEBUG batch = 200, loss = 55.1332
+2018-03-10 22:18:22,609 train.py[line:53] DEBUG batch = 220, loss = 56.9300
+2018-03-10 22:18:27,135 train.py[line:64] INFO Epoch done, average loss: 56.1142
+2018-03-10 22:18:33,058 train.py[line:237] INFO loss on dev set is 66.9597
+2018-03-10 22:18:33,060 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:18:33,061 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:18:33,061 train.py[line:279] INFO epoch 10 done, dev acc is: 58.0538, time_used: 16.3662 minutes
+2018-03-10 22:18:33,090 train.py[line:231] INFO Start training epoch: 11, learning_rate: 0.00100
+2018-03-10 22:18:41,239 train.py[line:53] DEBUG batch = 20, loss = 51.7653
+2018-03-10 22:18:49,018 train.py[line:53] DEBUG batch = 40, loss = 47.8033
+2018-03-10 22:18:57,026 train.py[line:53] DEBUG batch = 60, loss = 51.9552
+2018-03-10 22:19:04,698 train.py[line:53] DEBUG batch = 80, loss = 51.7844
+2018-03-10 22:19:12,801 train.py[line:53] DEBUG batch = 100, loss = 53.8932
+2018-03-10 22:19:20,877 train.py[line:53] DEBUG batch = 120, loss = 52.0175
+2018-03-10 22:19:29,082 train.py[line:53] DEBUG batch = 140, loss = 51.2545
+2018-03-10 22:19:37,031 train.py[line:53] DEBUG batch = 160, loss = 52.3974
+2018-03-10 22:19:45,059 train.py[line:53] DEBUG batch = 180, loss = 51.4290
+2018-03-10 22:19:53,072 train.py[line:53] DEBUG batch = 200, loss = 53.4091
+2018-03-10 22:20:01,285 train.py[line:53] DEBUG batch = 220, loss = 53.6035
+2018-03-10 22:20:05,778 train.py[line:64] INFO Epoch done, average loss: 51.9113
+2018-03-10 22:20:11,663 train.py[line:237] INFO loss on dev set is 68.2815
+2018-03-10 22:20:11,663 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:20:11,664 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:20:11,664 train.py[line:279] INFO epoch 11 done, dev acc is: 58.0001, time_used: 18.0095 minutes
+2018-03-10 22:20:11,703 train.py[line:231] INFO Start training epoch: 12, learning_rate: 0.00100
+2018-03-10 22:20:19,877 train.py[line:53] DEBUG batch = 20, loss = 47.9905
+2018-03-10 22:20:27,605 train.py[line:53] DEBUG batch = 40, loss = 47.2276
+2018-03-10 22:20:35,451 train.py[line:53] DEBUG batch = 60, loss = 47.3066
+2018-03-10 22:20:43,217 train.py[line:53] DEBUG batch = 80, loss = 48.3403
+2018-03-10 22:20:51,474 train.py[line:53] DEBUG batch = 100, loss = 50.5050
+2018-03-10 22:20:59,525 train.py[line:53] DEBUG batch = 120, loss = 48.2485
+2018-03-10 22:21:07,342 train.py[line:53] DEBUG batch = 140, loss = 47.6491
+2018-03-10 22:21:15,390 train.py[line:53] DEBUG batch = 160, loss = 47.4507
+2018-03-10 22:21:23,412 train.py[line:53] DEBUG batch = 180, loss = 46.8530
+2018-03-10 22:21:31,464 train.py[line:53] DEBUG batch = 200, loss = 49.0867
+2018-03-10 22:21:39,469 train.py[line:53] DEBUG batch = 220, loss = 48.9465
+2018-03-10 22:21:43,981 train.py[line:64] INFO Epoch done, average loss: 48.1626
+2018-03-10 22:21:49,871 train.py[line:237] INFO loss on dev set is 66.8282
+2018-03-10 22:21:49,874 train.py[line:262] INFO adjust_rate_count: 2
+2018-03-10 22:21:49,874 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:21:49,874 train.py[line:279] INFO epoch 12 done, dev acc is: 59.4171, time_used: 19.6464 minutes
+2018-03-10 22:21:49,905 train.py[line:231] INFO Start training epoch: 13, learning_rate: 0.00100
+2018-03-10 22:21:57,962 train.py[line:53] DEBUG batch = 20, loss = 41.7403
+2018-03-10 22:22:06,182 train.py[line:53] DEBUG batch = 40, loss = 45.0154
+2018-03-10 22:22:14,219 train.py[line:53] DEBUG batch = 60, loss = 43.8402
+2018-03-10 22:22:22,179 train.py[line:53] DEBUG batch = 80, loss = 44.9281
+2018-03-10 22:22:30,345 train.py[line:53] DEBUG batch = 100, loss = 47.6337
+2018-03-10 22:22:38,409 train.py[line:53] DEBUG batch = 120, loss = 44.6534
+2018-03-10 22:22:46,331 train.py[line:53] DEBUG batch = 140, loss = 45.7324
+2018-03-10 22:22:53,937 train.py[line:53] DEBUG batch = 160, loss = 43.1445
+2018-03-10 22:23:02,234 train.py[line:53] DEBUG batch = 180, loss = 46.7273
+2018-03-10 22:23:10,247 train.py[line:53] DEBUG batch = 200, loss = 45.5723
+2018-03-10 22:23:17,705 train.py[line:53] DEBUG batch = 220, loss = 44.2880
+2018-03-10 22:23:22,102 train.py[line:64] INFO Epoch done, average loss: 44.8096
+2018-03-10 22:23:27,979 train.py[line:237] INFO loss on dev set is 66.4070
+2018-03-10 22:23:27,982 train.py[line:262] INFO adjust_rate_count: 3
+2018-03-10 22:23:27,982 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:23:27,982 train.py[line:279] INFO epoch 13 done, dev acc is: 60.1846, time_used: 21.2815 minutes
+2018-03-10 22:23:28,012 train.py[line:231] INFO Start training epoch: 14, learning_rate: 0.00100
+2018-03-10 22:23:36,013 train.py[line:53] DEBUG batch = 20, loss = 37.9303
+2018-03-10 22:23:44,033 train.py[line:53] DEBUG batch = 40, loss = 39.3532
+2018-03-10 22:23:51,983 train.py[line:53] DEBUG batch = 60, loss = 41.2166
+2018-03-10 22:23:59,847 train.py[line:53] DEBUG batch = 80, loss = 40.5585
+2018-03-10 22:24:07,943 train.py[line:53] DEBUG batch = 100, loss = 40.9246
+2018-03-10 22:24:16,012 train.py[line:53] DEBUG batch = 120, loss = 39.3504
+2018-03-10 22:24:23,808 train.py[line:53] DEBUG batch = 140, loss = 41.6955
+2018-03-10 22:24:31,778 train.py[line:53] DEBUG batch = 160, loss = 43.6180
+2018-03-10 22:24:39,556 train.py[line:53] DEBUG batch = 180, loss = 39.5999
+2018-03-10 22:24:47,529 train.py[line:53] DEBUG batch = 200, loss = 44.8288
+2018-03-10 22:24:55,627 train.py[line:53] DEBUG batch = 220, loss = 42.5056
+2018-03-10 22:25:00,281 train.py[line:64] INFO Epoch done, average loss: 41.0517
+2018-03-10 22:25:06,186 train.py[line:237] INFO loss on dev set is 67.8194
+2018-03-10 22:25:06,186 train.py[line:262] INFO adjust_rate_count: 4
+2018-03-10 22:25:06,186 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:25:06,186 train.py[line:279] INFO epoch 14 done, dev acc is: 60.1202, time_used: 22.9183 minutes
+2018-03-10 22:25:06,217 train.py[line:231] INFO Start training epoch: 15, learning_rate: 0.00100
+2018-03-10 22:25:14,575 train.py[line:53] DEBUG batch = 20, loss = 38.0251
+2018-03-10 22:25:22,665 train.py[line:53] DEBUG batch = 40, loss = 35.2816
+2018-03-10 22:25:30,759 train.py[line:53] DEBUG batch = 60, loss = 36.7791
+2018-03-10 22:25:38,667 train.py[line:53] DEBUG batch = 80, loss = 37.2535
+2018-03-10 22:25:46,486 train.py[line:53] DEBUG batch = 100, loss = 36.4735
+2018-03-10 22:25:54,785 train.py[line:53] DEBUG batch = 120, loss = 38.9366
+2018-03-10 22:26:02,678 train.py[line:53] DEBUG batch = 140, loss = 40.6755
+2018-03-10 22:26:10,564 train.py[line:53] DEBUG batch = 160, loss = 38.5782
+2018-03-10 22:26:18,365 train.py[line:53] DEBUG batch = 180, loss = 38.8089
+2018-03-10 22:26:26,125 train.py[line:53] DEBUG batch = 200, loss = 36.9675
+2018-03-10 22:26:34,315 train.py[line:53] DEBUG batch = 220, loss = 39.9199
+2018-03-10 22:26:38,839 train.py[line:64] INFO Epoch done, average loss: 38.1302
+2018-03-10 22:26:44,804 train.py[line:237] INFO loss on dev set is 67.2638
+2018-03-10 22:26:44,804 train.py[line:262] INFO adjust_rate_count: 5
+2018-03-10 22:26:44,804 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:26:44,804 train.py[line:279] INFO epoch 15 done, dev acc is: 61.3869, time_used: 24.5619 minutes
+2018-03-10 22:26:44,834 train.py[line:231] INFO Start training epoch: 16, learning_rate: 0.00100
+2018-03-10 22:26:52,990 train.py[line:53] DEBUG batch = 20, loss = 32.5803
+2018-03-10 22:27:00,541 train.py[line:53] DEBUG batch = 40, loss = 34.3558
+2018-03-10 22:27:08,274 train.py[line:53] DEBUG batch = 60, loss = 36.0322
+2018-03-10 22:27:16,212 train.py[line:53] DEBUG batch = 80, loss = 33.4458
+2018-03-10 22:27:23,803 train.py[line:53] DEBUG batch = 100, loss = 34.3121
+2018-03-10 22:27:31,911 train.py[line:53] DEBUG batch = 120, loss = 35.3037
+2018-03-10 22:27:40,061 train.py[line:53] DEBUG batch = 140, loss = 36.8507
+2018-03-10 22:27:48,299 train.py[line:53] DEBUG batch = 160, loss = 36.3705
+2018-03-10 22:27:56,054 train.py[line:53] DEBUG batch = 180, loss = 34.6684
+2018-03-10 22:28:04,393 train.py[line:53] DEBUG batch = 200, loss = 37.2493
+2018-03-10 22:28:12,431 train.py[line:53] DEBUG batch = 220, loss = 34.9341
+2018-03-10 22:28:16,882 train.py[line:64] INFO Epoch done, average loss: 35.1916
+2018-03-10 22:28:22,797 train.py[line:237] INFO loss on dev set is 69.6437
+2018-03-10 22:28:22,797 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:28:22,797 train.py[line:263] INFO adjust_time: 0
+2018-03-10 22:28:22,799 train.py[line:279] INFO epoch 16 done, dev acc is: 61.0703, time_used: 26.1951 minutes
+2018-03-10 22:28:22,828 train.py[line:231] INFO Start training epoch: 17, learning_rate: 0.00050
+2018-03-10 22:28:31,017 train.py[line:53] DEBUG batch = 20, loss = 37.3206
+2018-03-10 22:28:39,230 train.py[line:53] DEBUG batch = 40, loss = 35.6934
+2018-03-10 22:28:47,341 train.py[line:53] DEBUG batch = 60, loss = 36.3363
+2018-03-10 22:28:55,384 train.py[line:53] DEBUG batch = 80, loss = 36.9552
+2018-03-10 22:29:03,178 train.py[line:53] DEBUG batch = 100, loss = 34.1000
+2018-03-10 22:29:11,169 train.py[line:53] DEBUG batch = 120, loss = 36.5815
+2018-03-10 22:29:18,993 train.py[line:53] DEBUG batch = 140, loss = 35.3502
+2018-03-10 22:29:27,163 train.py[line:53] DEBUG batch = 160, loss = 35.9996
+2018-03-10 22:29:35,163 train.py[line:53] DEBUG batch = 180, loss = 36.9425
+2018-03-10 22:29:42,938 train.py[line:53] DEBUG batch = 200, loss = 34.2718
+2018-03-10 22:29:50,977 train.py[line:53] DEBUG batch = 220, loss = 36.6031
+2018-03-10 22:29:55,535 train.py[line:64] INFO Epoch done, average loss: 35.9658
+2018-03-10 22:30:01,456 train.py[line:237] INFO loss on dev set is 64.3672
+2018-03-10 22:30:01,459 train.py[line:262] INFO adjust_rate_count: 0
+2018-03-10 22:30:01,459 train.py[line:263] INFO adjust_time: 1
+2018-03-10 22:30:01,459 train.py[line:279] INFO epoch 17 done, dev acc is: 62.4819, time_used: 27.8395 minutes
+2018-03-10 22:30:01,491 train.py[line:231] INFO Start training epoch: 18, learning_rate: 0.00050
+2018-03-10 22:30:09,453 train.py[line:53] DEBUG batch = 20, loss = 30.7838
+2018-03-10 22:30:17,267 train.py[line:53] DEBUG batch = 40, loss = 30.3262
+2018-03-10 22:30:25,650 train.py[line:53] DEBUG batch = 60, loss = 29.6940
+2018-03-10 22:30:33,624 train.py[line:53] DEBUG batch = 80, loss = 29.9953
+2018-03-10 22:30:41,559 train.py[line:53] DEBUG batch = 100, loss = 33.0078
+2018-03-10 22:30:49,512 train.py[line:53] DEBUG batch = 120, loss = 32.1339
+2018-03-10 22:30:57,466 train.py[line:53] DEBUG batch = 140, loss = 31.7183
+2018-03-10 22:31:05,674 train.py[line:53] DEBUG batch = 160, loss = 33.9999
+2018-03-10 22:31:13,726 train.py[line:53] DEBUG batch = 180, loss = 34.4784
+2018-03-10 22:31:21,957 train.py[line:53] DEBUG batch = 200, loss = 32.7055
+2018-03-10 22:31:29,804 train.py[line:53] DEBUG batch = 220, loss = 33.1817
+2018-03-10 22:31:34,334 train.py[line:64] INFO Epoch done, average loss: 32.1046
+2018-03-10 22:31:40,272 train.py[line:237] INFO loss on dev set is 66.2460
+2018-03-10 22:31:40,272 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:31:40,272 train.py[line:263] INFO adjust_time: 1
+2018-03-10 22:31:40,273 train.py[line:279] INFO epoch 18 done, dev acc is: 62.8039, time_used: 29.4864 minutes
+2018-03-10 22:31:40,313 train.py[line:231] INFO Start training epoch: 19, learning_rate: 0.00050
+2018-03-10 22:31:48,360 train.py[line:53] DEBUG batch = 20, loss = 27.4328
+2018-03-10 22:31:56,459 train.py[line:53] DEBUG batch = 40, loss = 27.3585
+2018-03-10 22:32:04,523 train.py[line:53] DEBUG batch = 60, loss = 27.9736
+2018-03-10 22:32:12,363 train.py[line:53] DEBUG batch = 80, loss = 28.2014
+2018-03-10 22:32:20,187 train.py[line:53] DEBUG batch = 100, loss = 29.2866
+2018-03-10 22:32:27,984 train.py[line:53] DEBUG batch = 120, loss = 30.5563
+2018-03-10 22:32:35,749 train.py[line:53] DEBUG batch = 140, loss = 28.0134
+2018-03-10 22:32:43,605 train.py[line:53] DEBUG batch = 160, loss = 28.7154
+2018-03-10 22:32:51,607 train.py[line:53] DEBUG batch = 180, loss = 30.7533
+2018-03-10 22:32:59,774 train.py[line:53] DEBUG batch = 200, loss = 29.7290
+2018-03-10 22:33:07,770 train.py[line:53] DEBUG batch = 220, loss = 29.2594
+2018-03-10 22:33:12,392 train.py[line:64] INFO Epoch done, average loss: 28.8678
+2018-03-10 22:33:18,277 train.py[line:237] INFO loss on dev set is 68.0279
+2018-03-10 22:33:18,278 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:33:18,278 train.py[line:263] INFO adjust_time: 1
+2018-03-10 22:33:18,280 train.py[line:279] INFO epoch 19 done, dev acc is: 62.7181, time_used: 31.1198 minutes
+2018-03-10 22:33:18,309 train.py[line:231] INFO Start training epoch: 20, learning_rate: 0.00025
+2018-03-10 22:33:26,295 train.py[line:53] DEBUG batch = 20, loss = 29.4392
+2018-03-10 22:33:34,270 train.py[line:53] DEBUG batch = 40, loss = 28.8165
+2018-03-10 22:33:41,962 train.py[line:53] DEBUG batch = 60, loss = 29.2820
+2018-03-10 22:33:49,746 train.py[line:53] DEBUG batch = 80, loss = 27.3342
+2018-03-10 22:33:57,624 train.py[line:53] DEBUG batch = 100, loss = 29.1702
+2018-03-10 22:34:05,635 train.py[line:53] DEBUG batch = 120, loss = 29.0840
+2018-03-10 22:34:14,112 train.py[line:53] DEBUG batch = 140, loss = 29.1127
+2018-03-10 22:34:21,855 train.py[line:53] DEBUG batch = 160, loss = 29.3383
+2018-03-10 22:34:29,883 train.py[line:53] DEBUG batch = 180, loss = 28.5297
+2018-03-10 22:34:37,913 train.py[line:53] DEBUG batch = 200, loss = 31.5430
+2018-03-10 22:34:45,676 train.py[line:53] DEBUG batch = 220, loss = 28.6315
+2018-03-10 22:34:50,317 train.py[line:64] INFO Epoch done, average loss: 29.0755
+2018-03-10 22:34:56,269 train.py[line:237] INFO loss on dev set is 64.2921
+2018-03-10 22:34:56,272 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:34:56,272 train.py[line:263] INFO adjust_time: 2
+2018-03-10 22:34:56,272 train.py[line:279] INFO epoch 20 done, dev acc is: 63.3138, time_used: 32.7530 minutes
+2018-03-10 22:34:56,304 train.py[line:231] INFO Start training epoch: 21, learning_rate: 0.00025
+2018-03-10 22:35:04,622 train.py[line:53] DEBUG batch = 20, loss = 25.7556
+2018-03-10 22:35:12,241 train.py[line:53] DEBUG batch = 40, loss = 26.4848
+2018-03-10 22:35:20,270 train.py[line:53] DEBUG batch = 60, loss = 25.2348
+2018-03-10 22:35:28,122 train.py[line:53] DEBUG batch = 80, loss = 25.4416
+2018-03-10 22:35:36,076 train.py[line:53] DEBUG batch = 100, loss = 24.9693
+2018-03-10 22:35:43,983 train.py[line:53] DEBUG batch = 120, loss = 25.7779
+2018-03-10 22:35:52,211 train.py[line:53] DEBUG batch = 140, loss = 24.8789
+2018-03-10 22:36:00,152 train.py[line:53] DEBUG batch = 160, loss = 26.6652
+2018-03-10 22:36:08,164 train.py[line:53] DEBUG batch = 180, loss = 26.8512
+2018-03-10 22:36:16,130 train.py[line:53] DEBUG batch = 200, loss = 27.0006
+2018-03-10 22:36:24,047 train.py[line:53] DEBUG batch = 220, loss = 25.3340
+2018-03-10 22:36:28,701 train.py[line:64] INFO Epoch done, average loss: 25.8242
+2018-03-10 22:36:34,610 train.py[line:237] INFO loss on dev set is 66.4211
+2018-03-10 22:36:34,610 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:36:34,610 train.py[line:263] INFO adjust_time: 2
+2018-03-10 22:36:34,612 train.py[line:279] INFO epoch 21 done, dev acc is: 63.2924, time_used: 34.3920 minutes
+2018-03-10 22:36:34,645 train.py[line:231] INFO Start training epoch: 22, learning_rate: 0.00013
+2018-03-10 22:36:42,705 train.py[line:53] DEBUG batch = 20, loss = 24.2264
+2018-03-10 22:36:50,797 train.py[line:53] DEBUG batch = 40, loss = 24.5721
+2018-03-10 22:36:58,757 train.py[line:53] DEBUG batch = 60, loss = 24.7025
+2018-03-10 22:37:06,694 train.py[line:53] DEBUG batch = 80, loss = 26.6639
+2018-03-10 22:37:14,737 train.py[line:53] DEBUG batch = 100, loss = 25.0109
+2018-03-10 22:37:22,816 train.py[line:53] DEBUG batch = 120, loss = 25.4208
+2018-03-10 22:37:30,791 train.py[line:53] DEBUG batch = 140, loss = 23.7335
+2018-03-10 22:37:38,499 train.py[line:53] DEBUG batch = 160, loss = 26.1292
+2018-03-10 22:37:46,712 train.py[line:53] DEBUG batch = 180, loss = 24.8759
+2018-03-10 22:37:54,714 train.py[line:53] DEBUG batch = 200, loss = 22.5917
+2018-03-10 22:38:02,746 train.py[line:53] DEBUG batch = 220, loss = 23.5762
+2018-03-10 22:38:07,342 train.py[line:64] INFO Epoch done, average loss: 24.7152
+2018-03-10 22:38:13,220 train.py[line:237] INFO loss on dev set is 65.2713
+2018-03-10 22:38:13,220 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:38:13,220 train.py[line:263] INFO adjust_time: 3
+2018-03-10 22:38:13,221 train.py[line:279] INFO epoch 22 done, dev acc is: 63.7432, time_used: 36.0355 minutes
+2018-03-10 22:38:13,251 train.py[line:231] INFO Start training epoch: 23, learning_rate: 0.00013
+2018-03-10 22:38:21,446 train.py[line:53] DEBUG batch = 20, loss = 23.4586
+2018-03-10 22:38:29,316 train.py[line:53] DEBUG batch = 40, loss = 21.9325
+2018-03-10 22:38:37,340 train.py[line:53] DEBUG batch = 60, loss = 22.0773
+2018-03-10 22:38:45,176 train.py[line:53] DEBUG batch = 80, loss = 23.9343
+2018-03-10 22:38:53,300 train.py[line:53] DEBUG batch = 100, loss = 24.9870
+2018-03-10 22:39:01,324 train.py[line:53] DEBUG batch = 120, loss = 22.0052
+2018-03-10 22:39:08,989 train.py[line:53] DEBUG batch = 140, loss = 22.5469
+2018-03-10 22:39:17,118 train.py[line:53] DEBUG batch = 160, loss = 22.2701
+2018-03-10 22:39:24,867 train.py[line:53] DEBUG batch = 180, loss = 22.8294
+2018-03-10 22:39:32,920 train.py[line:53] DEBUG batch = 200, loss = 23.0838
+2018-03-10 22:39:40,768 train.py[line:53] DEBUG batch = 220, loss = 22.7395
+2018-03-10 22:39:45,325 train.py[line:64] INFO Epoch done, average loss: 22.8747
+2018-03-10 22:39:51,249 train.py[line:237] INFO loss on dev set is 66.2719
+2018-03-10 22:39:51,250 train.py[line:262] INFO adjust_rate_count: 2
+2018-03-10 22:39:51,250 train.py[line:263] INFO adjust_time: 3
+2018-03-10 22:39:51,250 train.py[line:279] INFO epoch 23 done, dev acc is: 64.0492, time_used: 37.6693 minutes
+2018-03-10 22:39:51,280 train.py[line:231] INFO Start training epoch: 24, learning_rate: 0.00013
+2018-03-10 22:39:59,283 train.py[line:53] DEBUG batch = 20, loss = 19.4423
+2018-03-10 22:40:06,879 train.py[line:53] DEBUG batch = 40, loss = 21.2864
+2018-03-10 22:40:15,223 train.py[line:53] DEBUG batch = 60, loss = 21.7046
+2018-03-10 22:40:23,337 train.py[line:53] DEBUG batch = 80, loss = 19.9016
+2018-03-10 22:40:31,370 train.py[line:53] DEBUG batch = 100, loss = 22.9308
+2018-03-10 22:40:39,535 train.py[line:53] DEBUG batch = 120, loss = 21.0039
+2018-03-10 22:40:47,361 train.py[line:53] DEBUG batch = 140, loss = 21.0503
+2018-03-10 22:40:55,610 train.py[line:53] DEBUG batch = 160, loss = 22.6776
+2018-03-10 22:41:03,632 train.py[line:53] DEBUG batch = 180, loss = 20.3045
+2018-03-10 22:41:11,341 train.py[line:53] DEBUG batch = 200, loss = 22.2564
+2018-03-10 22:41:19,259 train.py[line:53] DEBUG batch = 220, loss = 21.8772
+2018-03-10 22:41:23,780 train.py[line:64] INFO Epoch done, average loss: 21.3171
+2018-03-10 22:41:29,722 train.py[line:237] INFO loss on dev set is 67.7643
+2018-03-10 22:41:29,723 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:41:29,723 train.py[line:263] INFO adjust_time: 3
+2018-03-10 22:41:29,725 train.py[line:279] INFO epoch 24 done, dev acc is: 63.8023, time_used: 39.3106 minutes
+2018-03-10 22:41:29,756 train.py[line:231] INFO Start training epoch: 25, learning_rate: 0.00006
+2018-03-10 22:41:37,849 train.py[line:53] DEBUG batch = 20, loss = 25.0502
+2018-03-10 22:41:45,760 train.py[line:53] DEBUG batch = 40, loss = 24.7170
+2018-03-10 22:41:53,562 train.py[line:53] DEBUG batch = 60, loss = 24.3299
+2018-03-10 22:42:01,469 train.py[line:53] DEBUG batch = 80, loss = 24.4894
+2018-03-10 22:42:09,588 train.py[line:53] DEBUG batch = 100, loss = 24.2971
+2018-03-10 22:42:17,487 train.py[line:53] DEBUG batch = 120, loss = 23.3810
+2018-03-10 22:42:25,368 train.py[line:53] DEBUG batch = 140, loss = 26.5155
+2018-03-10 22:42:33,122 train.py[line:53] DEBUG batch = 160, loss = 24.7546
+2018-03-10 22:42:41,032 train.py[line:53] DEBUG batch = 180, loss = 23.6441
+2018-03-10 22:42:48,908 train.py[line:53] DEBUG batch = 200, loss = 25.6450
+2018-03-10 22:42:57,081 train.py[line:53] DEBUG batch = 220, loss = 25.2897
+2018-03-10 22:43:01,519 train.py[line:64] INFO Epoch done, average loss: 24.7230
+2018-03-10 22:43:07,492 train.py[line:237] INFO loss on dev set is 64.9480
+2018-03-10 22:43:07,492 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:43:07,492 train.py[line:263] INFO adjust_time: 4
+2018-03-10 22:43:07,492 train.py[line:279] INFO epoch 25 done, dev acc is: 63.9526, time_used: 40.9400 minutes
+2018-03-10 22:43:07,523 train.py[line:231] INFO Start training epoch: 26, learning_rate: 0.00006
+2018-03-10 22:43:15,317 train.py[line:53] DEBUG batch = 20, loss = 23.3809
+2018-03-10 22:43:23,452 train.py[line:53] DEBUG batch = 40, loss = 21.3846
+2018-03-10 22:43:31,465 train.py[line:53] DEBUG batch = 60, loss = 21.7917
+2018-03-10 22:43:39,165 train.py[line:53] DEBUG batch = 80, loss = 22.6092
+2018-03-10 22:43:47,321 train.py[line:53] DEBUG batch = 100, loss = 23.1481
+2018-03-10 22:43:55,330 train.py[line:53] DEBUG batch = 120, loss = 23.0016
+2018-03-10 22:44:03,271 train.py[line:53] DEBUG batch = 140, loss = 22.4393
+2018-03-10 22:44:11,298 train.py[line:53] DEBUG batch = 160, loss = 23.3260
+2018-03-10 22:44:19,417 train.py[line:53] DEBUG batch = 180, loss = 24.0377
+2018-03-10 22:44:27,310 train.py[line:53] DEBUG batch = 200, loss = 23.3123
+2018-03-10 22:44:34,962 train.py[line:53] DEBUG batch = 220, loss = 23.4377
+2018-03-10 22:44:39,337 train.py[line:64] INFO Epoch done, average loss: 22.8638
+2018-03-10 22:44:45,213 train.py[line:237] INFO loss on dev set is 66.9386
+2018-03-10 22:44:45,214 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:44:45,214 train.py[line:263] INFO adjust_time: 4
+2018-03-10 22:44:45,216 train.py[line:279] INFO epoch 26 done, dev acc is: 63.9096, time_used: 42.5687 minutes
+2018-03-10 22:44:45,246 train.py[line:231] INFO Start training epoch: 27, learning_rate: 0.00003
+2018-03-10 22:44:53,422 train.py[line:53] DEBUG batch = 20, loss = 23.9207
+2018-03-10 22:45:01,442 train.py[line:53] DEBUG batch = 40, loss = 25.4953
+2018-03-10 22:45:09,467 train.py[line:53] DEBUG batch = 60, loss = 25.3054
+2018-03-10 22:45:17,497 train.py[line:53] DEBUG batch = 80, loss = 25.2104
+2018-03-10 22:45:25,086 train.py[line:53] DEBUG batch = 100, loss = 24.1674
+2018-03-10 22:45:32,755 train.py[line:53] DEBUG batch = 120, loss = 23.4928
+2018-03-10 22:45:40,597 train.py[line:53] DEBUG batch = 140, loss = 24.9054
+2018-03-10 22:45:48,541 train.py[line:53] DEBUG batch = 160, loss = 24.5012
+2018-03-10 22:45:56,457 train.py[line:53] DEBUG batch = 180, loss = 24.1810
+2018-03-10 22:46:04,315 train.py[line:53] DEBUG batch = 200, loss = 24.9218
+2018-03-10 22:46:12,292 train.py[line:53] DEBUG batch = 220, loss = 25.0799
+2018-03-10 22:46:17,034 train.py[line:64] INFO Epoch done, average loss: 24.6653
+2018-03-10 22:46:22,929 train.py[line:237] INFO loss on dev set is 65.3840
+2018-03-10 22:46:22,930 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:46:22,930 train.py[line:263] INFO adjust_time: 5
+2018-03-10 22:46:22,930 train.py[line:279] INFO epoch 27 done, dev acc is: 63.8881, time_used: 44.1973 minutes
+2018-03-10 22:46:22,960 train.py[line:231] INFO Start training epoch: 28, learning_rate: 0.00003
+2018-03-10 22:46:31,062 train.py[line:53] DEBUG batch = 20, loss = 23.4577
+2018-03-10 22:46:39,109 train.py[line:53] DEBUG batch = 40, loss = 21.2275
+2018-03-10 22:46:46,831 train.py[line:53] DEBUG batch = 60, loss = 21.9530
+2018-03-10 22:46:54,721 train.py[line:53] DEBUG batch = 80, loss = 24.0521
+2018-03-10 22:47:02,536 train.py[line:53] DEBUG batch = 100, loss = 22.9770
+2018-03-10 22:47:10,257 train.py[line:53] DEBUG batch = 120, loss = 23.0561
+2018-03-10 22:47:17,968 train.py[line:53] DEBUG batch = 140, loss = 21.5227
+2018-03-10 22:47:26,051 train.py[line:53] DEBUG batch = 160, loss = 22.7053
+2018-03-10 22:47:34,143 train.py[line:53] DEBUG batch = 180, loss = 22.0560
+2018-03-10 22:47:42,001 train.py[line:53] DEBUG batch = 200, loss = 22.7032
+2018-03-10 22:47:50,087 train.py[line:53] DEBUG batch = 220, loss = 24.0982
+2018-03-10 22:47:54,892 train.py[line:64] INFO Epoch done, average loss: 22.7147
+2018-03-10 22:48:00,833 train.py[line:237] INFO loss on dev set is 66.4364
+2018-03-10 22:48:00,833 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:48:00,834 train.py[line:263] INFO adjust_time: 5
+2018-03-10 22:48:00,836 train.py[line:279] INFO epoch 28 done, dev acc is: 64.0116, time_used: 45.8291 minutes
+2018-03-10 22:48:00,865 train.py[line:231] INFO Start training epoch: 29, learning_rate: 0.00002
+2018-03-10 22:48:08,830 train.py[line:53] DEBUG batch = 20, loss = 23.6746
+2018-03-10 22:48:16,620 train.py[line:53] DEBUG batch = 40, loss = 24.7172
+2018-03-10 22:48:24,771 train.py[line:53] DEBUG batch = 60, loss = 24.9386
+2018-03-10 22:48:32,977 train.py[line:53] DEBUG batch = 80, loss = 24.1853
+2018-03-10 22:48:41,036 train.py[line:53] DEBUG batch = 100, loss = 26.3591
+2018-03-10 22:48:49,156 train.py[line:53] DEBUG batch = 120, loss = 23.8762
+2018-03-10 22:48:56,898 train.py[line:53] DEBUG batch = 140, loss = 22.9861
+2018-03-10 22:49:04,868 train.py[line:53] DEBUG batch = 160, loss = 25.3609
+2018-03-10 22:49:12,852 train.py[line:53] DEBUG batch = 180, loss = 25.2991
+2018-03-10 22:49:20,604 train.py[line:53] DEBUG batch = 200, loss = 24.4349
+2018-03-10 22:49:28,237 train.py[line:53] DEBUG batch = 220, loss = 25.8697
+2018-03-10 22:49:32,628 train.py[line:64] INFO Epoch done, average loss: 24.6587
+2018-03-10 22:49:38,540 train.py[line:237] INFO loss on dev set is 64.9564
+2018-03-10 22:49:38,540 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:49:38,540 train.py[line:263] INFO adjust_time: 6
+2018-03-10 22:49:38,540 train.py[line:279] INFO epoch 29 done, dev acc is: 64.0921, time_used: 47.4575 minutes
+2018-03-10 22:49:38,570 train.py[line:231] INFO Start training epoch: 30, learning_rate: 0.00002
+2018-03-10 22:49:46,642 train.py[line:53] DEBUG batch = 20, loss = 22.8686
+2018-03-10 22:49:54,880 train.py[line:53] DEBUG batch = 40, loss = 23.0923
+2018-03-10 22:50:02,749 train.py[line:53] DEBUG batch = 60, loss = 20.9548
+2018-03-10 22:50:10,592 train.py[line:53] DEBUG batch = 80, loss = 22.6099
+2018-03-10 22:50:18,638 train.py[line:53] DEBUG batch = 100, loss = 24.1455
+2018-03-10 22:50:26,525 train.py[line:53] DEBUG batch = 120, loss = 24.2175
+2018-03-10 22:50:34,342 train.py[line:53] DEBUG batch = 140, loss = 22.6467
+2018-03-10 22:50:42,183 train.py[line:53] DEBUG batch = 160, loss = 20.1695
+2018-03-10 22:50:50,069 train.py[line:53] DEBUG batch = 180, loss = 23.3963
+2018-03-10 22:50:57,980 train.py[line:53] DEBUG batch = 200, loss = 22.5624
+2018-03-10 22:51:05,832 train.py[line:53] DEBUG batch = 220, loss = 23.1587
+2018-03-10 22:51:10,556 train.py[line:64] INFO Epoch done, average loss: 22.7957
+2018-03-10 22:51:16,433 train.py[line:237] INFO loss on dev set is 66.4152
+2018-03-10 22:51:16,433 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:51:16,434 train.py[line:263] INFO adjust_time: 6
+2018-03-10 22:51:16,436 train.py[line:279] INFO epoch 30 done, dev acc is: 64.0599, time_used: 49.0891 minutes
+2018-03-10 22:51:16,466 train.py[line:231] INFO Start training epoch: 31, learning_rate: 0.00001
+2018-03-10 22:51:24,496 train.py[line:53] DEBUG batch = 20, loss = 24.2503
+2018-03-10 22:51:32,380 train.py[line:53] DEBUG batch = 40, loss = 25.5851
+2018-03-10 22:51:40,226 train.py[line:53] DEBUG batch = 60, loss = 24.3096
+2018-03-10 22:51:48,176 train.py[line:53] DEBUG batch = 80, loss = 24.8248
+2018-03-10 22:51:56,017 train.py[line:53] DEBUG batch = 100, loss = 24.7817
+2018-03-10 22:52:03,725 train.py[line:53] DEBUG batch = 120, loss = 24.7516
+2018-03-10 22:52:11,785 train.py[line:53] DEBUG batch = 140, loss = 25.3671
+2018-03-10 22:52:19,692 train.py[line:53] DEBUG batch = 160, loss = 23.9031
+2018-03-10 22:52:27,900 train.py[line:53] DEBUG batch = 180, loss = 24.7665
+2018-03-10 22:52:35,892 train.py[line:53] DEBUG batch = 200, loss = 26.7310
+2018-03-10 22:52:43,811 train.py[line:53] DEBUG batch = 220, loss = 23.6144
+2018-03-10 22:52:48,321 train.py[line:64] INFO Epoch done, average loss: 24.7139
+2018-03-10 22:52:54,263 train.py[line:237] INFO loss on dev set is 65.1101
+2018-03-10 22:52:54,263 train.py[line:262] INFO adjust_rate_count: 1
+2018-03-10 22:52:54,263 train.py[line:263] INFO adjust_time: 7
+2018-03-10 22:52:54,263 train.py[line:279] INFO epoch 31 done, dev acc is: 63.8184, time_used: 50.7195 minutes
+2018-03-10 22:52:54,294 train.py[line:231] INFO Start training epoch: 32, learning_rate: 0.00001
+2018-03-10 22:53:02,269 train.py[line:53] DEBUG batch = 20, loss = 21.1340
+2018-03-10 22:53:10,208 train.py[line:53] DEBUG batch = 40, loss = 22.7505
+2018-03-10 22:53:18,116 train.py[line:53] DEBUG batch = 60, loss = 22.3990
+2018-03-10 22:53:26,171 train.py[line:53] DEBUG batch = 80, loss = 22.5152
+2018-03-10 22:53:34,268 train.py[line:53] DEBUG batch = 100, loss = 22.2094
+2018-03-10 22:53:42,113 train.py[line:53] DEBUG batch = 120, loss = 23.9746
+2018-03-10 22:53:49,894 train.py[line:53] DEBUG batch = 140, loss = 21.7215
+2018-03-10 22:53:58,050 train.py[line:53] DEBUG batch = 160, loss = 22.8538
+2018-03-10 22:54:05,965 train.py[line:53] DEBUG batch = 180, loss = 25.4747
+2018-03-10 22:54:13,944 train.py[line:53] DEBUG batch = 200, loss = 22.0401
+2018-03-10 22:54:22,056 train.py[line:53] DEBUG batch = 220, loss = 24.0580
+2018-03-10 22:54:26,445 train.py[line:64] INFO Epoch done, average loss: 22.7886
+2018-03-10 22:54:32,365 train.py[line:237] INFO loss on dev set is 66.3923
+2018-03-10 22:54:32,366 train.py[line:262] INFO adjust_rate_count: 10
+2018-03-10 22:54:32,366 train.py[line:263] INFO adjust_time: 7
+2018-03-10 22:54:32,368 train.py[line:279] INFO epoch 32 done, dev acc is: 63.8559, time_used: 52.3546 minutes
+2018-03-10 22:54:32,398 train.py[line:290] INFO End training, best dev loss acc is: 64.2921, acc is: 63.3138

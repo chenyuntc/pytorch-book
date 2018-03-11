@@ -2,5 +2,3 @@ torch
 numpy
 scipy
 librosa
-torchaudio
-
