@@ -30,7 +30,7 @@ python -m visdom.serber
 
 ## 使用方法：
 1、打开顶层脚本run.sh,修改相应的文件路径(TIMIT_dir, CONF_FILE)。  
-2、打开conf目录下的ctc_model_setting.conf进行网络结构等各项设置。
+2、打开conf目录下的ctc_model_setting.conf进行网络结构等各项设置。  
 3、运行顶层脚本，后面带有一个参数stage，0表示从数据开始运行，1表示从训练开始，2表示直接测试
 ```
 - bash run.sh 0     数据处理 + 训练 + 测试  
