@@ -1,9 +1,6 @@
 这是书籍《深度学习框架PyTorch：入门与实践》的对应代码，但是也可以作为一个独立的PyTorch入门指南和教程。
 
-![](http://img14.360buyimg.com/n1/jfs/t13339/32/2463730198/217483/e8148c6b/5a41277dNbd1470c1.jpg)
 
-- [京东购买链接](https://search.jd.com/Search?keyword=pytorch%20入门与实践&enc=utf-8&wq=pytorch%20入门与实践&pvid=8b0d91d7108845ad8cbaf596326f3eb3)
-- [当当购买链接](http://search.dangdang.com/?key=pytorch%20%C8%EB%C3%C5%D3%EB%CA%B5%BC%F9&act=input)
 ## 内容
 
 该书（教程/仓库）的内容如图所示：
@@ -25,6 +22,7 @@
 - 第八章为读者讲解了风格迁移的相关知识，并带领读者实现风格迁移网络，将自己的照片变成高大上的名画。
 - 第九章为读者讲解了一些自然语言处理的基础知识，并讲解了CharRNN的原理。而后利用收集了几万首唐诗，训练出了一个可以自动写诗歌的小程序。这个小程序可以控制生成诗歌的**格式**，**意境**，还能生成**藏头诗**。
 - 第十章为读者介绍了图像描述任务，并以最新的AI Challenger比赛的数据为例，带领读者实现了一个可以进行简单图像描述的的小程序。
+- 第十一章（**新增，实验性**） 由[Diamondfan](https://github.com/Diamondfan) 编写的语音识别。完善了本项目（本项目已囊括图像，文本，语音三大领域的例子）。
 
 
  **Notebook中的文字描述内容属于本书的初稿，有描述不通顺，错别字之处还请谅解**。本打算删除notebook中描述的内容，只留下代码，但为了方便读者阅读学习，最终还是决定留下。 我会抽空根据书中内容逐字校对这部分内容，但并不对此并不提供具体时间点。
@@ -32,13 +30,6 @@
 ## 是否需要买书
 
 书**不是必要的**，这个仓库包含书中50%以上的文字内容，90%以上的代码，尤其是前几章入门内容，几乎是完全保留了书中的讲解内容。读者即使不买书也能正常使用本教程。
-
-但纸质书有如下**优势**：
-
-- 更流畅的体验： 书中的文字，描述，内容经过**多人反复校对**审查所得，所以描述更自然，错误更少，排版更美观。这个仓库中的Jupyter Notebook中的内容属于本书的**初稿**，因此有不少描述不通顺，错别字，错误之处。
-- 更好的排版：Jupyter Notebook虽然支持markdown，但是排版比较别扭，而书中的排版有严格的规范。
-- 更完整的内容，更丰富的插图，更详细代码说明：尤其是实战部分，有对于代码设计的说明，原理的讲解，模型的介绍，结合书中内容会更好的理解代码。
-- 有纸质书在手，可以快速翻阅查找。
 
 如果你觉得纸质书的优势吸引你，不妨小破费一笔，支持一下作者这大半年来的工作。同时为了尽可能的方便读者，笔者还专门开通腾讯云的服务，用以保存教程中用到的部分模型，预处理的数据和部分大文件。
 
@@ -76,33 +67,7 @@ git checkout v0.2
 ```
 pip install --upgrade visdom
 ```
-
-########################## deprecated ####################################
-
-~~教程中用到了Visdom作为可视化工具，但是最近发现visdom 不能用了，打开之后网页一片空白，经过抓包分析发现是两个js文件被防火墙给阻挡了~~：
-
-- `https://cdn.rawgit.com/plotly/plotly.js/master/dist/plotly.min.js`
-- `https://cdn.rawgit.com/STRML/react-grid-layout/0.14.0/dist/react-grid-layout.min.js`
-
-~~这里本人提供一个比较简单的解决方法：~~
-- Step 1： 找到系统使用visdom的`index.html`文件，
-
-  ```Bash
-  locate visdom/static/index.html
-  ```
-
- ~~输出 系统中visdom 的html文件：~~
-
-  ```Bash
-  /usr/local/lib/python2.7/dist-packages/visdom/static/index.html
-  /usr/local/lib/python3.5/dist-packages/visdom/static/index.html
-  ```
-
-- ~~Step 2：下载[本人修改过后的文件](http://pytorch-1252820389.cosbj.myqcloud.com/visdom/index.html)，替换`step1` 找到的`index.html`, 可能需要root权限。~~
-
-~~这时候再刷新浏览器，就能发现visdom正常显示了。~~
-
-########################## deprecated ####################################
+之前的[解决方案](https://github.com/chenyuntc/pytorch-book/blob/2c8366137b691aaa8fbeeea478cc1611c09e15f5/README.md#visdom%E6%89%93%E4%B8%8D%E5%BC%80%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88) 不再需要，已删除。
 
 ## ^_^
 
@@ -111,3 +76,8 @@ pip install --upgrade visdom
 欢迎pull requests
 
 Happy Coding!
+
+![](http://img14.360buyimg.com/n1/jfs/t13339/32/2463730198/217483/e8148c6b/5a41277dNbd1470c1.jpg)
+
+- [京东购买链接](https://search.jd.com/Search?keyword=pytorch%20入门与实践&enc=utf-8&wq=pytorch%20入门与实践&pvid=8b0d91d7108845ad8cbaf596326f3eb3)
+- [当当购买链接](http://search.dangdang.com/?key=pytorch%20%C8%EB%C3%C5%D3%EB%CA%B5%BC%F9&act=input)
