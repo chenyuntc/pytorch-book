@@ -16,13 +16,11 @@ from data  import int2char, SpeechDataset, SpeechDataLoader
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--conf', help='conf file for training')
-parser.add_argument('--decode-type', dest='decode_type', default='Greedy', help='Decoder for test. GreadyDecoder or Beam search Decoder')
-parser.add_argument('--data-set', dest='data_set', default='test', help='data set to test')
-
 def test():
     args = parser.parse_args()
     cf = ConfigParser.ConfigParser()
     cf.read(args.conf)
+    USE_CUDA = cf.getboolean('Training', 'USE_CUDA')
     model_path = cf.get('Model', 'model_file')
     data_dir = cf.get('Data', 'data_dir')
     beam_width = cf.getint('Decode', 'beam_width')
@@ -33,9 +31,10 @@ def test():
     n_feats = package['epoch']['n_feats']
     drop_out = package['_drop_out']
 
-    decoder_type =  args.decode_type
+    decoder_type =  cf.get('Decode', 'decoder_type')
+    data_set = cf.get('Decode', 'eval_dataset')
 
-    test_dataset = SpeechDataset(data_dir, data_set=args.data_set)
+    test_dataset = SpeechDataset(data_dir, data_set=data_set)
     
     model = CTC_Model(rnn_param=rnn_param, num_class=num_class, drop_out=drop_out)
         

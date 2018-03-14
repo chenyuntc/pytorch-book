@@ -8,31 +8,30 @@ LOG_ONE = 0.0
 class BeamEntry:
     "information about one single beam at specific time-step"
     def __init__(self):
-        self.prTotal=LOG_ZERO      # blank and non-blank
-	self.prNonBlank=LOG_ZERO   # non-blank
-	self.prBlank=LOG_ZERO      # blank
-	self.y=()                  # labelling at current time-step
-
+        self.prTotal=LOG_ZERO       # blank and non-blank
+        self.prNonBlank=LOG_ZERO    # non-blank
+        self.prBlank=LOG_ZERO       # blank
+        self.y=()                   # labelling at current time-step
 
 class BeamState:
     "information about beams at specific time-step"
     def __init__(self):
-	self.entries={}
+        self.entries={}
 
     def norm(self):
-	"length-normalise probabilities to avoid penalising long labellings"
-	for (k,v) in self.entries.items():
-	    labellingLen=len(self.entries[k].y)
-	    self.entries[k].prTotal=self.entries[k].prTotal*(1.0/(labellingLen if labellingLen else 1))
+        "length-normalise probabilities to avoid penalising long labellings"
+        for (k,v) in self.entries.items():
+            labellingLen=len(self.entries[k].y)
+            self.entries[k].prTotal=self.entries[k].prTotal*(1.0/(labellingLen if labellingLen else 1))
 
     def sort(self):
-	"return beams sorted by probability"
-	u=[v for (k,v) in self.entries.items()]
-	s=sorted(u, reverse=True, key=lambda x:x.prTotal)
-	return [x.y for x in s]
+        "return beams sorted by probability"
+        u=[v for (k,v) in self.entries.items()]
+        s=sorted(u, reverse=True, key=lambda x:x.prTotal)
+        return [x.y for x in s]
 
 class ctcBeamSearch(object):
-    def __init__(self, classes, beam_width, blank_index=0):	
+    def __init__(self, classes, beam_width, blank_index=0):
         self.classes = classes
         self.beamWidth = beam_width
         self.blank_index = blank_index
@@ -50,14 +49,14 @@ class ctcBeamSearch(object):
         "probability for extending labelling y to y+k"
         # optical model (RNN)
         if len(y) and y[-1]==k and mat[t-1, self.blank_index] < 0.9:
-	    return math.log(mat[t, k]) + beamState.entries[y].prBlank
+            return math.log(mat[t, k]) + beamState.entries[y].prBlank
         else:
-	    return math.log(mat[t, k]) + beamState.entries[y].prTotal
+            return math.log(mat[t, k]) + beamState.entries[y].prTotal
     
     def addLabelling(self, beamState, y):
         "adds labelling if it does not exist yet"
         if y not in beamState.entries:
-	    beamState.entries[y]=BeamEntry()
+            beamState.entries[y]=BeamEntry()
     
     def decode(self, inputs, inputs_list):
         '''
@@ -68,7 +67,7 @@ class ctcBeamSearch(object):
             res(list)           :  Result of beam search
         '''
         batches, maxT, maxC = inputs.size()
-	res = []
+        res = []
         
         for batch in range(batches):
             mat = inputs[batch].numpy()
@@ -82,10 +81,13 @@ class ctcBeamSearch(object):
             # go over all time-steps
             for t in range(inputs_list[batch]):
                 curr=BeamState()
-                if (1 - mat[t, self.blank_index]) < 0.1:         #跳过概率很接近1的blank帧，增加解码速度
+                
+                #跳过概率很接近1的blank帧，增加解码速度
+                if (1 - mat[t, self.blank_index]) < 0.1:
                     continue
-                # get best labellings
-                BHat=last.sort()[0:self.beamWidth]                 #取前beam个最好的结果
+
+                #取前beam个最好的结果
+                BHat=last.sort()[0:self.beamWidth]
                 # go over best labellings
                 for y in BHat:
                     prNonBlank=LOG_ZERO
@@ -129,5 +131,4 @@ class ctcBeamSearch(object):
             res_b =''.join([self.classes[l] for l in bestLabelling])
             res.append(res_b)
         return res
-
 

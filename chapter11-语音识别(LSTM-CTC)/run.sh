@@ -3,9 +3,6 @@
 #顶层脚本  训练和测试测试集
 stage=0
 
-decode_type='Greedy'
-data_set='test'
-
 CONF_FILE='./conf/ctc_model_setting.conf'
 TIMIT_dir='/home/fan/Audio_data/TIMIT'
 
@@ -31,10 +28,10 @@ fi
 
 if [ $stage -le 2 ]; then
     echo ========================================================
-    echo "             $decode_type Decoding                    " 
+    echo "                    Decoding                          " 
     echo ========================================================
 
-    python test.py --conf $CONF_FILE --decode-type $decode_type --data-set $data_set || exit 1
+    python test.py --conf $CONF_FILE || exit 1
 fi
 
 ###############################################################

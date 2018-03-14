@@ -18,11 +18,25 @@ from decoder import GreedyDecoder
 from warpctc_pytorch import CTCLoss
 from data import int2char, SpeechDataset, SpeechDataLoader
 
-RNN = {'nn.LSTM': nn.LSTM }
+#支持的rnn类型
+RNN = {'lstm': nn.LSTM, 'rnn':nn.RNN, 'gru':nn.GRU }
+
 parser = argparse.ArgumentParser(description='lstm_ctc')
 parser.add_argument('--conf', default='./conf/ctc_model_setting.conf' , help='conf file with Argument of LSTM and training')
 
-def train(model, train_loader, loss_fn, optimizer, logger, print_every=20):
+def train(model, train_loader, loss_fn, optimizer, logger, print_every=20, USE_CUDA=True):
+    '''训练一个epoch，即将整个训练集跑一次
+    Args:
+        model         :  定义的网络模型
+        train_loader  :  加载训练集的类对象
+        loss_fn       :  损失函数，此处为CTCLoss
+        optimizer     :  优化器类对象
+        logger        :  日志类对象
+        print_every   :  每20个batch打印一次loss
+        USE_CUDA      :  是否使用GPU
+    Returns:
+        average_loss  :  一个epoch的平均loss
+    '''
     model.train()
     
     total_loss = 0
@@ -64,7 +78,19 @@ def train(model, train_loader, loss_fn, optimizer, logger, print_every=20):
     logger.info("Epoch done, average loss: %.4f" % average_loss)
     return average_loss
 
-def dev(model, dev_loader, loss_fn, decoder, logger):
+def dev(model, dev_loader, loss_fn, decoder, logger, USE_CUDA=True):
+    '''验证集的计算过程，与train()不同的是不需要反向传播过程，并且需要计算字符正确率
+    Args:
+        model       :   模型
+        dev_loader  :   加载验证集的类对象
+        loss_fn     :   损失函数
+        decoder     :   解码类对象，即将网络的输出解码成文本
+        logger      :   日志类对象
+        USE_CUDA    :   是否使用GPU
+    Returns:
+        acc * 100    :   字符正确率，如果space不是一个标签的话，则为词正确率
+        average_loss :   验证集的平均loss
+    '''
     model.eval()
     total_cer = 0
     total_tokens = 0
@@ -106,6 +132,12 @@ def dev(model, dev_loader, loss_fn, decoder, logger):
     return acc * 100, average_loss
 
 def init_logger(log_file):
+    '''得到一个日志的类对象
+    Args:
+        log_file   :  日志文件名
+    Returns:
+        logger     :  日志类对象
+    '''
     import logging
     from logging.handlers import RotatingFileHandler
 
@@ -125,6 +157,7 @@ def main():
     except:
         print("conf file not exists")
         sys.exit(1)
+    USE_CUDA = cf.getboolean('Training', 'use_cuda')
     try:
         seed = long(cf.get('Training', 'seed'))
     except:
@@ -230,9 +263,9 @@ def main():
         print("Start training epoch: %d, learning_rate: %.5f" % (count, learning_rate))
         logger.info("Start training epoch: %d, learning_rate: %.5f" % (count, learning_rate))
         
-        loss = train(model, train_loader, loss_fn, optimizer, logger, print_every=20)
+        loss = train(model, train_loader, loss_fn, optimizer, logger, print_every=20, USE_CUDA=USE_CUDA)
         loss_results.append(loss)
-        acc, dev_loss = dev(model, dev_loader, loss_fn, decoder, logger)
+        acc, dev_loss = dev(model, dev_loader, loss_fn, decoder, logger, USE_CUDA=USE_CUDA)
         print("loss on dev set is %.4f" % dev_loss)
         logger.info("loss on dev set is %.4f" % dev_loss)
         dev_loss_results.append(dev_loss)

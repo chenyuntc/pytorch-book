@@ -7,10 +7,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from collections import OrderedDict
 
-support_rnn = {'lstm': nn.LSTM, 'rnn': nn.RNN, 'gru': nn.GRU}
-support_activation = {"relu": nn.ReLU, "tanh":nn.Tanh, "sigmoid":nn.Sigmoid}
-USE_CUDA = True
-
 class SequenceWise(nn.Module):
     '''调整输入满足module的需求，因为多次使用，所以模块化构建一个类
     适用于将LSTM的输出通过batchnorm或者Linear层
