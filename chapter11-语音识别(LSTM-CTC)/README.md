@@ -1,6 +1,8 @@
-本章内容是通过pytorch搭建一个LSTM-CTC的语音识别声学模型。本次实验的数据为TIMIT数据集(可点击[academictorrents](http://academictorrents.com/details/34e2b78745138186976cbc27939b1b34d18bd5b3/tech) 或者 [luojie1987/TIMIT](http://luojie1987.com/index.php/post/110.html) 下载数据集)。 
+本章内容是通过pytorch搭建一个LSTM-CTC的语音识别声学模型。  
+
+本次实验的数据为TIMIT数据集(可点击[academictorrents](http://academictorrents.com/details/34e2b78745138186976cbc27939b1b34d18bd5b3/tech) 或者 [luojie1987/TIMIT](http://luojie1987.com/index.php/post/110.html) 下载数据集)。 
  
-不过有很多其他公开的语音相关的数据库可以在这里下载[Open Speech and Language Resources](http://www.openslr.org/resources.php)
+还有很多其他公开的语音相关的数据库可以在这里下载[Open Speech and Language Resources](http://www.openslr.org/resources.php)
 
 本项目的内容大多参考项目[https://github.com/Diamondfan/CTC_pytorch/](https://github.com/Diamondfan/CTC_pytorch/)
 
@@ -27,7 +29,7 @@ python -m visdom.serber
 ```
 
 ## 使用方法：
-1、打开顶层脚本run.sh,修改相应的文件路径(TIMIT_dir, CONF_FILE)。
+1、打开顶层脚本run.sh,修改相应的文件路径(TIMIT_dir, CONF_FILE)。  
 2、打开conf目录下的ctc_model_setting.conf进行网络结构等各项设置。
 3、运行顶层脚本，后面带有一个参数stage，0表示从数据开始运行，1表示从训练开始，2表示直接测试
 ```
