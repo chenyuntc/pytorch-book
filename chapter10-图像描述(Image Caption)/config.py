@@ -7,7 +7,7 @@ class Config:
     # img_path='/mnt/ht/aichallenger/raw/ai_challenger_caption_train_20170902/caption_train_images_20170902/'
     img_feature_path = 'results.pth' # 所有图片的features,20w*2048的向量
     scale_size = 300
-    img_size = 256
+    img_size = 224 
     batch_size=8
     shuffle = True
     num_workers = 4
