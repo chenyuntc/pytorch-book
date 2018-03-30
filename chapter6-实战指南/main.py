@@ -12,8 +12,8 @@ from tqdm import tqdm
 
 def test(**kwargs):
     opt.parse(kwargs)
-    import ipdb;
-    ipdb.set_trace()
+    # import ipdb;
+    # ipdb.set_trace()
     # configure model
     model = getattr(models, opt.model)().eval()
     if opt.load_model_path:
