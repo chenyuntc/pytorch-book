@@ -29,7 +29,7 @@ python -m visdom.server
 
 ```
 # 在gpu0上训练,并把可视化结果保存在visdom 的classifier env上
-python main.py train --data-root=./data/train --use-gpu=True --env=classifier
+python main.py train --train-data-root=./data/train --use-gpu=True --env=classifier
 ```
 
 
