@@ -1,4 +1,4 @@
-#coding:utf8
+# coding:utf8
 import torch as t
 from torch.utils import data
 import os
@@ -6,8 +6,9 @@ from PIL import Image
 import torchvision as tv
 import numpy as np
 
-IMAGENET_MEAN =  [0.485, 0.456, 0.406]
-IMAGENET_STD =  [0.229, 0.224, 0.225]
+IMAGENET_MEAN = [0.485, 0.456, 0.406]
+IMAGENET_STD = [0.229, 0.224, 0.225]
+
 
 # - 区分训练集和验证集
 # - 不是随机返回每句话，而是根据index%5
@@ -18,9 +19,9 @@ IMAGENET_STD =  [0.229, 0.224, 0.225]
 #         pass
 #     return collate_fn
 
-def create_collate_fn( padding,eos,max_length=50):
+def create_collate_fn(padding, eos, max_length=50):
     def collate_fn(img_cap):
-        '''
+        """
         将多个样本拼接在一起成一个batch
         输入： list of data，形如
         [(img1, cap1, index1), (img2, cap2, index2) ....]
@@ -37,9 +38,9 @@ def create_collate_fn( padding,eos,max_length=50):
         - cap_tensor(Tensor): batch_size*max_length
         - lengths(list of int): 长度为batch_size
         - index(list of int): 长度为batch_size
-        '''
+        """
         img_cap.sort(key=lambda p: len(p[1]), reverse=True)
-        imgs, caps,indexs = zip(*img_cap)
+        imgs, caps, indexs = zip(*img_cap)
         imgs = t.cat([img.unsqueeze(0) for img in imgs], 0)
         lengths = [min(len(c) + 1, max_length) for c in caps]
         batch_length = max(lengths)
@@ -49,13 +50,15 @@ def create_collate_fn( padding,eos,max_length=50):
             if end_cap < batch_length:
                 cap_tensor[end_cap, i] = eos
             cap_tensor[:end_cap, i].copy_(c[:end_cap])
-        return (imgs, (cap_tensor, lengths),indexs)
+        return (imgs, (cap_tensor, lengths), indexs)
+
     return collate_fn
 
+
 class CaptionDataset(data.Dataset):
-    
-    def __init__(self,opt,transforms=None):
-        '''
+
+    def __init__(self, opt):
+        """
         Attributes:
             _data (dict): 预处理之后的数据，包括所有图片的文件名，以及处理过后的描述
             all_imgs (tensor): 利用resnet50提取的图片特征，形状（200000，2048）
@@ -65,7 +68,7 @@ class CaptionDataset(data.Dataset):
                 前190000张图片是训练集，剩下的10000张图片是验证集
             len_(init): 数据集大小，如果是训练集，长度就是190000，验证集长度为10000
             traininig(bool): 是训练集(True),还是验证集(False)
-        '''
+        """
         self.opt = opt
         data = t.load(opt.caption_data_path)
         word2ix = data['word2ix']
@@ -76,37 +79,40 @@ class CaptionDataset(data.Dataset):
         self.ix2id = data['ix2id']
         self.all_imgs = t.load(opt.img_feature_path)
 
-    def __getitem__(self,index):
-        '''
+    def __getitem__(self, index):
+        """
         返回：
         - img: 图像features 2048的向量
         - caption: 描述，形如LongTensor([1,3,5,2]),长度取决于描述长度
         - index: 下标，图像的序号，可以通过ix2id[index]获取对应图片文件名
-        '''
+        """
         img = self.all_imgs[index]
-        
+
         caption = self.captions[index]
         # 5句描述随机选一句
-        rdn_index = np.random.choice(len(caption),1)[0]
+        rdn_index = np.random.choice(len(caption), 1)[0]
         caption = caption[rdn_index]
-        return img,t.LongTensor(caption),index
+        return img, t.LongTensor(caption), index
 
     def __len__(self):
         return len(self.ix2id)
-        
-def get_dataloader(opt,training=True):
+
+
+def get_dataloader(opt):
     dataset = CaptionDataset(opt)
     dataloader = data.DataLoader(dataset,
-                    batch_size=opt.batch_size,
-                    shuffle=opt.shuffle,
-                    num_workers=opt.num_workers,
-                    collate_fn=create_collate_fn(dataset.padding,dataset.end))
+                                 batch_size=opt.batch_size,
+                                 shuffle=opt.shuffle,
+                                 num_workers=opt.num_workers,
+                                 collate_fn=create_collate_fn(dataset.padding, dataset.end))
     return dataloader
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     from config import Config
+
     opt = Config()
-    dataloader = get_dataloader(opt) 
-    for ii,data in enumerate(dataloader):
-        print(ii,data)
+    dataloader = get_dataloader(opt)
+    for ii, data in enumerate(dataloader):
+        print(ii, data)
         break

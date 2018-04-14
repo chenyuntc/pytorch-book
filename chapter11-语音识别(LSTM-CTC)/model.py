@@ -8,18 +8,18 @@ import torch.nn.functional as F
 from collections import OrderedDict
 
 class SequenceWise(nn.Module):
-    '''调整输入满足module的需求，因为多次使用，所以模块化构建一个类
+    """调整输入满足module的需求，因为多次使用，所以模块化构建一个类
     适用于将LSTM的输出通过batchnorm或者Linear层
-    '''
+    """
     def __init__(self, module):
         super(SequenceWise, self).__init__()
         self.module = module
 
     def forward(self, x):
-        '''
+        """
         Args:
             x :    PackedSequence
-        '''
+        """
         x, batch_size_len = x.data, x.batch_sizes
         #x.data:    sum(x_len) * num_features
         x = self.module(x)
@@ -33,10 +33,10 @@ class SequenceWise(nn.Module):
         return tmpstr
 
 class BatchSoftmax(nn.Module):
-    '''
+    """
     The layer to add softmax for a sequence, which is the output of rnn
     Which state use its own softmax, and concat the result
-    '''
+    """
     def forward(self, x):
         #x: seq_len * batch_size * num
         if not self.training:

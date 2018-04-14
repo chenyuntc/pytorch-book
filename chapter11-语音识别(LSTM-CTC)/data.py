@@ -81,12 +81,12 @@ def collate_fn(batch):
     targets = torch.IntTensor(targets)
     return inputs, targets, input_sizes, input_size_list, target_sizes
 
-'''
+"""
 class torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False, 
                                         sampler=None, batch_sampler=None, num_workers=0, 
                                         collate_fn=<function default_collate>, 
                                         pin_memory=False, drop_last=False)
-'''
+"""
 class SpeechDataLoader(DataLoader):
     def __init__(self, *args, **kwargs):
         super(SpeechDataLoader, self).__init__(*args, **kwargs)

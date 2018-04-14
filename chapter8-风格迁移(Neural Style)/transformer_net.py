@@ -1,7 +1,7 @@
-#coding:utf8
-'''
+# coding:utf8
+"""
 code refer to https://github.com/abhiskk/fast-neural-style/blob/master/neural_style/transformer_net.py
-'''
+"""
 import torch as t
 from torch import nn
 import numpy as np
@@ -13,15 +13,15 @@ class TransformerNet(nn.Module):
 
         # 下卷积层
         self.initial_layers = nn.Sequential(
-             ConvLayer(3, 32, kernel_size=9, stride=1),
-             nn.InstanceNorm2d(32,affine=True),
-             nn.ReLU(True),
-             ConvLayer(32, 64, kernel_size=3, stride=2),
-             nn.InstanceNorm2d(64,affine=True),
-             nn.ReLU(True),
-             ConvLayer(64, 128, kernel_size=3, stride=2),
-             nn.InstanceNorm2d(128,affine=True),
-             nn.ReLU(True),          
+            ConvLayer(3, 32, kernel_size=9, stride=1),
+            nn.InstanceNorm2d(32, affine=True),
+            nn.ReLU(True),
+            ConvLayer(32, 64, kernel_size=3, stride=2),
+            nn.InstanceNorm2d(64, affine=True),
+            nn.ReLU(True),
+            ConvLayer(64, 128, kernel_size=3, stride=2),
+            nn.InstanceNorm2d(128, affine=True),
+            nn.ReLU(True),
         )
 
         # Residual layers(残差层)
@@ -36,14 +36,13 @@ class TransformerNet(nn.Module):
         # Upsampling Layers(上卷积层)
         self.upsample_layers = nn.Sequential(
             UpsampleConvLayer(128, 64, kernel_size=3, stride=1, upsample=2),
-            nn.InstanceNorm2d(64,affine=True),
+            nn.InstanceNorm2d(64, affine=True),
             nn.ReLU(True),
             UpsampleConvLayer(64, 32, kernel_size=3, stride=1, upsample=2),
-            nn.InstanceNorm2d(32,affine=True),
+            nn.InstanceNorm2d(32, affine=True),
             nn.ReLU(True),
             ConvLayer(32, 3, kernel_size=9, stride=1)
         )
-
 
     def forward(self, x):
         x = self.initial_layers(x)
@@ -53,10 +52,11 @@ class TransformerNet(nn.Module):
 
 
 class ConvLayer(nn.Module):
-    '''
+    """
     add ReflectionPad for Conv
     默认的卷积的padding操作是补0，这里使用边界反射填充
-    '''
+    """
+
     def __init__(self, in_channels, out_channels, kernel_size, stride):
         super(ConvLayer, self).__init__()
         reflection_padding = int(np.floor(kernel_size / 2))
@@ -67,6 +67,7 @@ class ConvLayer(nn.Module):
         out = self.reflection_pad(x)
         out = self.conv2d(out)
         return out
+
 
 class UpsampleConvLayer(nn.Module):
     """UpsampleConvLayer
@@ -102,9 +103,9 @@ class ResidualBlock(nn.Module):
     def __init__(self, channels):
         super(ResidualBlock, self).__init__()
         self.conv1 = ConvLayer(channels, channels, kernel_size=3, stride=1)
-        self.in1 = nn.InstanceNorm2d(channels,affine=True)
+        self.in1 = nn.InstanceNorm2d(channels, affine=True)
         self.conv2 = ConvLayer(channels, channels, kernel_size=3, stride=1)
-        self.in2 = nn.InstanceNorm2d(channels,affine=True)
+        self.in2 = nn.InstanceNorm2d(channels, affine=True)
         self.relu = nn.ReLU()
 
     def forward(self, x):

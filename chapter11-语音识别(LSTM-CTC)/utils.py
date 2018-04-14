@@ -8,12 +8,12 @@ import librosa
 import torchaudio
 
 def load_audio(path):
-    '''使用torchaudio读取音频
+    """使用torchaudio读取音频
     Args:
         path(string)            : 音频的路径
     Returns:
         sound(numpy.ndarray)    : 单声道音频数据，如果是多声道进行平均(Samples * 1 channel)
-    '''
+    """
     sound, _ = torchaudio.load(path)
     sound = sound.numpy()
     if len(sound.shape) > 1:
@@ -24,7 +24,7 @@ def load_audio(path):
     return sound
 
 def parse_audio(path, audio_conf, windows, normalize=False):
-    '''使用librosa计算音频的对数幅度谱
+    """使用librosa计算音频的对数幅度谱
     Args:
         path(string)       : 音频的路径
         audio_conf(dict)   : 求频谱的参数
@@ -32,7 +32,7 @@ def parse_audio(path, audio_conf, windows, normalize=False):
     Returns:
         spect(FloatTensor) : 音频的对数幅度谱(numFrames * nFeatures)
                              nFeatures = n_fft / 2 + 1
-    '''
+    """
     y = load_audio(path)
     n_fft = int(audio_conf['sample_rate']*audio_conf["window_size"])
     win_length = n_fft
@@ -53,13 +53,13 @@ def parse_audio(path, audio_conf, windows, normalize=False):
     return spect.transpose(0,1)
 
 def process_label_file(label_file, char2int):
-    '''将文本标签处理为数字，转化为numpy类型是为了存储为h5py文件
+    """将文本标签处理为数字，转化为numpy类型是为了存储为h5py文件
     Args:
         label_file(string)  :  标签文件路径
         char2int(dict)      :  标签到数字的映射关系 "_'abcdefghijklmnopqrstuvwxyz"
     Output:
         label_dict(list)    :  所有句子的标签，每个句子是list类型
-    '''
+    """
     label_all = []
     with open(label_file, 'r') as f:
         for label in f.readlines():

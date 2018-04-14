@@ -9,7 +9,10 @@ import copy
 import torch
 import argparse
 import numpy as np
-import ConfigParser
+try:
+    import ConfigParser
+except:
+    import configparser as ConfigParser
 import torch.nn as nn
 from torch.autograd import Variable
 
@@ -25,7 +28,7 @@ parser = argparse.ArgumentParser(description='lstm_ctc')
 parser.add_argument('--conf', default='./conf/ctc_model_setting.conf' , help='conf file with Argument of LSTM and training')
 
 def train(model, train_loader, loss_fn, optimizer, logger, print_every=20, USE_CUDA=True):
-    '''训练一个epoch，即将整个训练集跑一次
+    """训练一个epoch，即将整个训练集跑一次
     Args:
         model         :  定义的网络模型
         train_loader  :  加载训练集的类对象
@@ -36,7 +39,7 @@ def train(model, train_loader, loss_fn, optimizer, logger, print_every=20, USE_C
         USE_CUDA      :  是否使用GPU
     Returns:
         average_loss  :  一个epoch的平均loss
-    '''
+    """
     model.train()
     
     total_loss = 0
@@ -79,7 +82,7 @@ def train(model, train_loader, loss_fn, optimizer, logger, print_every=20, USE_C
     return average_loss
 
 def dev(model, dev_loader, loss_fn, decoder, logger, USE_CUDA=True):
-    '''验证集的计算过程，与train()不同的是不需要反向传播过程，并且需要计算字符正确率
+    """验证集的计算过程，与train()不同的是不需要反向传播过程，并且需要计算字符正确率
     Args:
         model       :   模型
         dev_loader  :   加载验证集的类对象
@@ -90,7 +93,7 @@ def dev(model, dev_loader, loss_fn, decoder, logger, USE_CUDA=True):
     Returns:
         acc * 100    :   字符正确率，如果space不是一个标签的话，则为词正确率
         average_loss :   验证集的平均loss
-    '''
+    """
     model.eval()
     total_cer = 0
     total_tokens = 0
@@ -132,12 +135,12 @@ def dev(model, dev_loader, loss_fn, decoder, logger, USE_CUDA=True):
     return acc * 100, average_loss
 
 def init_logger(log_file):
-    '''得到一个日志的类对象
+    """得到一个日志的类对象
     Args:
         log_file   :  日志文件名
     Returns:
         logger     :  日志类对象
-    '''
+    """
     import logging
     from logging.handlers import RotatingFileHandler
 

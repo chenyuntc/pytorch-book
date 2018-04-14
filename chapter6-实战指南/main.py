@@ -128,18 +128,16 @@ def train(**kwargs):
         previous_loss = loss_meter.value()[0]
 
 def val(model,dataloader):
-    '''
+    """
     计算模型在验证集上的准确率等信息
-    '''
+    """
     model.eval()
     confusion_matrix = meter.ConfusionMeter(2)
     for ii, data in tqdm(enumerate(dataloader)):
         input, label = data
         val_input = Variable(input, volatile=True)
-        val_label = Variable(label.type(t.LongTensor), volatile=True)
         if opt.use_gpu:
             val_input = val_input.cuda()
-            val_label = val_label.cuda()
         score = model(val_input)
         confusion_matrix.add(score.data.squeeze(), label.type(t.LongTensor))
 
@@ -149,18 +147,18 @@ def val(model,dataloader):
     return confusion_matrix, accuracy
 
 def help():
-    '''
+    """
     打印帮助的信息： python file.py help
-    '''
+    """
     
-    print('''
+    print("""
     usage : python file.py <function> [--args=value]
     <function> := train | test | help
     example: 
             python {0} train --env='env0701' --lr=0.01
             python {0} test --dataset='path/to/dataset/root/'
             python {0} help
-    avaiable args:'''.format(__file__))
+    avaiable args:""".format(__file__))
 
     from inspect import getsource
     source = (getsource(opt.__class__))

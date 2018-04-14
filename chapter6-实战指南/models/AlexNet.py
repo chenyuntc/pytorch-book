@@ -1,16 +1,17 @@
-#coding:utf8
+# coding:utf8
 from torch import nn
 from .BasicModule import BasicModule
 
+
 class AlexNet(BasicModule):
-    '''
+    """
     code from torchvision/models/alexnet.py
     结构参考 <https://arxiv.org/abs/1404.5997>
-    '''
+    """
+
     def __init__(self, num_classes=2):
-        
         super(AlexNet, self).__init__()
-        
+
         self.model_name = 'alexnet'
 
         self.features = nn.Sequential(

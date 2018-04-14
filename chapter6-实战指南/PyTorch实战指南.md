@@ -92,9 +92,9 @@ from torchvision import transforms as T
 class DogCat(data.Dataset):
     
     def __init__(self, root, transforms=None, train=True, test=False):
-        '''
+        """
         目标：获取所有图片地址，并根据训练、验证、测试划分数据
-        '''
+        """
         self.test = test
         imgs = [os.path.join(root, img) for img in os.listdir(root)] 
 
@@ -142,10 +142,10 @@ class DogCat(data.Dataset):
                 
         
     def __getitem__(self, index):
-        '''
+        """
         返回一张图片的数据
         对于测试集，没有label，返回图片id，如1000.jpg返回1000
-        '''
+        """
         img_path = self.imgs[index]
         if self.test: 
              label = int(self.imgs[index].split('.')[-2].split('/')[-1])
@@ -156,9 +156,9 @@ class DogCat(data.Dataset):
         return data, label
     
     def __len__(self):
-        '''
+        """
         返回数据集中所有图片的个数
-        '''
+        """
         return len(self.imgs)
 ```
 
@@ -181,25 +181,25 @@ for ii, (data, label) in enumerate(trainloader):
 
 ```python
 class BasicModule(t.nn.Module):
-    '''
+    """
     封装了nn.Module，主要提供save和load两个方法
-    '''
+    """
 
     def __init__(self):
         super(BasicModule,self).__init__()
         self.model_name = str(type(self)) # 模型的默认名字
 
     def load(self, path):
-        '''
+        """
         可加载指定路径的模型
-        '''
+        """
         self.load_state_dict(t.load(path))
 
     def save(self, name=None):
-        '''
+        """
         保存模型，默认使用“模型名字+时间”作为文件名，
         如AlexNet_0710_23:57:29.pth
-        '''
+        """
         if name is None:
             prefix = 'checkpoints/' + self.model_name + '_'
             name = time.strftime(prefix + '%m%d_%H:%M:%S.pth')
@@ -247,14 +247,14 @@ import time
 import numpy as np
 
 class Visualizer(object):
-    '''
+    """
     封装了visdom的基本操作，但是你仍然可以通过`self.vis.function`
     或者`self.function`调用原生的visdom接口
     比如 
     self.text('hello visdom')
     self.histogram(t.randn(1000))
     self.line(t.arange(0, 10),t.arange(1, 11))
-    '''
+    """
 
     def __init__(self, env='default', **kwargs):
         self.vis = visdom.Visdom(env=env, **kwargs)
@@ -264,17 +264,17 @@ class Visualizer(object):
         self.index = {} 
         self.log_text = ''
     def reinit(self, env='default', **kwargs):
-        '''
+        """
         修改visdom的配置
-        '''
+        """
         self.vis = visdom.Visdom(env=env, **kwargs)
         return self
 
     def plot_many(self, d):
-        '''
+        """
         一次plot多个
         @params d: dict (name, value) i.e. ('loss', 0.11)
-        '''
+        """
         for k, v in d.items():
             self.plot(k, v)
 
@@ -283,9 +283,9 @@ class Visualizer(object):
             self.img(k, v)
 
     def plot(self, name, y, **kwargs):
-        '''
+        """
         self.plot('loss', 1.00)
-        '''
+        """
         x = self.index.get(name, 0)
         self.vis.line(Y=np.array([y]), X=np.array([x]),
                       win=name,
@@ -296,14 +296,14 @@ class Visualizer(object):
         self.index[name] = x + 1
 
     def img(self, name, img_, **kwargs):
-        '''
+        """
         self.img('input_img', t.Tensor(64, 64))
         self.img('input_imgs', t.Tensor(3, 64, 64))
         self.img('input_imgs', t.Tensor(100, 1, 64, 64))
         self.img('input_imgs', t.Tensor(100, 3, 64, 64), nrows=10)
 
         !!! don't ~~self.img('input_imgs', t.Tensor(100, 64, 64), nrows=10)~~ !!!
-        '''
+        """
         self.vis.images(img_.cpu().numpy(),
                        win=name,
                        opts=dict(title=name),
@@ -311,9 +311,9 @@ class Visualizer(object):
                        )
 
     def log(self, info, win='log_text'):
-        '''
+        """
         self.log({'loss':1, 'lr':0.0001})
-        '''
+        """
 
         self.log_text += ('[{time}] {info} <br>'.format(
                             time=time.strftime('%m%d_%H%M%S'),\
@@ -321,10 +321,10 @@ class Visualizer(object):
         self.vis.text(self.log_text, win)   
 
     def __getattr__(self, name):
-        '''
+        """
         自定义的plot,image,log,plot_many等除外
         self.function 等价于self.vis.function
-        '''
+        """
         return getattr(self.vis, name)
 ```
 
@@ -377,9 +377,9 @@ dataset = DogCat(opt.train_data_root)
 
 ```
 def parse(self, kwargs):
-        '''
+        """
         根据字典kwargs 更新 config参数
-        '''
+        """
         # 更新配置参数
         for k, v in kwargs.items():
             if not hasattr(self, k):
@@ -441,27 +441,27 @@ python example.py add --x=1 --y==2 # 执行add(x=1, y=2)
 
 ```python
 def train(**kwargs):
-    '''
+    """
     训练
-    '''
+    """
     pass
 	 
 def val(model, dataloader):
-    '''
+    """
     计算模型在验证集上的准确率等信息，用以辅助训练
-    '''
+    """
     pass
 
 def test(**kwargs):
-    '''
+    """
     测试（inference）
-    '''
+    """
     pass
 
 def help():
-    '''
+    """
     打印帮助的信息 
-    '''
+    """
     print('help')
 
 if __name__=='__main__':
@@ -595,9 +595,9 @@ PyTorchNet从TorchNet[^6]迁移而来，提供了很多有用的工具，但其�
 
 ```python
 def val(model,dataloader):
-    '''
+    """
     计算模型在验证集上的准确率等信息
-    '''
+    """
 
     # 把模型设为验证模式
     model.eval()
@@ -663,18 +663,18 @@ def test(**kwargs):
 
 ```python
 def help():
-    '''
+    """
     打印帮助的信息： python file.py help
-    '''
+    """
     
-    print('''
+    print("""
     usage : python {0} <function> [--args=value,]
     <function> := train | test | help
     example: 
             python {0} train --env='env0701' --lr=0.01
             python {0} test --dataset='path/to/dataset/root/'
             python {0} help
-    avaiable args:'''.format(__file__))
+    avaiable args:""".format(__file__))
 
     from inspect import getsource
     source = (getsource(opt.__class__))
@@ -781,10 +781,10 @@ parser.add_argument('-save-interval', type=int, default=500, help='how many step
 抑或是专门设计一个`Trainer`对象，形如：
 
 ```python
-    '''
+    """
   code simplified from:
   https://github.com/pytorch/pytorch/blob/master/torch/utils/trainer/trainer.py
-  '''
+  """
   import heapq
   from torch.autograd import Variable
 
@@ -827,4 +827,4 @@ parser.add_argument('-save-interval', type=int, default=500, help='how many step
 
 还有一些人喜欢模仿keras和scikit-learn的设计，设计一个`fit`接口。对读者来说，这些处理方式很难说哪个更好或更差，找到最适合自己的方法才是最好的。
 
-- `BasicModule` 的封装，可多可少。训练过程中的很多操作都可以移到`BasicModule`之中，比如`get_optimizer`方法用来获取优化器，比如`train_step`用来执行单歩训练。对于不同的模型，如果对应的优化器定义不一样，或者是训练方法不一样，可以复写这些函数自定义相应的方法，取决于自己的喜好和项目的实际需求。   
+`BasicModule` 的封装，可多可少。训练过程中的很多操作都可以移到`BasicModule`之中，比如`get_optimizer`方法用来获取优化器，比如`train_step`用来执行单歩训练。对于不同的模型，如果对应的优化器定义不一样，或者是训练方法不一样，可以复写这些函数自定义相应的方法，取决于自己的喜好和项目的实际需求。

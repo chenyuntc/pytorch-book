@@ -59,13 +59,13 @@ class ctcBeamSearch(object):
             beamState.entries[y]=BeamEntry()
     
     def decode(self, inputs, inputs_list):
-        '''
+        """
         Args: 
             inputs(FloatTesnor) :  Output of CTC(batch * timesteps * class)
             inputs_list(list)   :  the frames of each sample
         Returns:
             res(list)           :  Result of beam search
-        '''
+        """
         batches, maxT, maxC = inputs.size()
         res = []
         
