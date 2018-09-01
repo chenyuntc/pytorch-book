@@ -41,5 +41,5 @@ python main.py help
 ## 测试
 
 ```
-python main.py test --data-root=./data/test --use-gpu=False --batch-size=256
+python main.py test --data-root=./data/test --device='cpu' --batch-size=256 --load-path='checkpoints/squeezenet.pth'
 ```

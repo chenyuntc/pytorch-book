@@ -1,6 +1,6 @@
 # coding:utf8
 from torch import nn
-from .BasicModule import BasicModule
+from .basic_module import BasicModule
 
 
 class AlexNet(BasicModule):

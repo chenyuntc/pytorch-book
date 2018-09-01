@@ -1,7 +1,6 @@
 # coding:utf8
 import os  # ,ipdb
 import torch as t
-from torch.autograd import Variable
 import torchvision as tv
 from torchnet import meter
 import tqdm
@@ -21,6 +20,7 @@ def generate(**kwargs):
     opt = Config()
     for k, v in kwargs.items():
         setattr(opt, k, v)
+    device=t.device('cuda') if opt.use_gpu else t.device('cpu')
 
     # 数据预处理
     data = t.load(opt.caption_data_path, map_location=lambda s, l: s)
@@ -28,7 +28,7 @@ def generate(**kwargs):
 
     normalize = tv.transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD)
     transforms = tv.transforms.Compose([
-        tv.transforms.Scale(opt.scale_size),
+        tv.transforms.Resize(opt.scale_size),
         tv.transforms.CenterCrop(opt.img_size),
         tv.transforms.ToTensor(),
         normalize
@@ -40,16 +40,14 @@ def generate(**kwargs):
     resnet50 = tv.models.resnet50(True).eval()
     del resnet50.fc
     resnet50.fc = lambda x: x
-    if opt.use_gpu:
-        resnet50.cuda()
-        img = img.cuda()
-    img_feats = resnet50(Variable(img, volatile=True))
+    resnet50.to(device)
+    img = img.to(device)
+    img_feats = resnet50(img).detach()
 
     # Caption模型
     model = CaptionModel(opt, word2ix, ix2word)
     model = model.load(opt.model_ckpt).eval()
-    if opt.use_gpu:
-        model.cuda()
+    model.to(device)
 
     results = model.generate(img_feats.data[0])
     print('\r\n'.join(results))
@@ -57,6 +55,10 @@ def generate(**kwargs):
 
 def train(**kwargs):
     opt = Config()
+    for k, v in kwargs.items():
+        setattr(opt, k, v)
+    device=t.device('cuda') if opt.use_gpu else t.device('cpu')
+
     opt.caption_data_path = 'caption.pth'  # 原始数据
     opt.test_img = ''  # 输入图片
     # opt.model_ckpt='caption_0914_1947' # 预训练的模型
@@ -73,9 +75,8 @@ def train(**kwargs):
         model.load(opt.model_ckpt)
     optimizer = model.get_optimizer(opt.lr)
     criterion = t.nn.CrossEntropyLoss()
-    if opt.use_gpu:
-        model.cuda()
-        criterion.cuda()
+   
+    model.to(device)
 
     # 统计
     loss_meter = meter.AverageValueMeter()
@@ -85,18 +86,15 @@ def train(**kwargs):
         for ii, (imgs, (captions, lengths), indexes) in tqdm.tqdm(enumerate(dataloader)):
             # 训练
             optimizer.zero_grad()
-            if opt.use_gpu:
-                imgs = imgs.cuda()
-                captions = captions.cuda()
-            imgs = Variable(imgs)
-            captions = Variable(captions)
+            imgs = imgs.to(device)
+            captions = captions.to(device)
             input_captions = captions[:-1]
             target_captions = pack_padded_sequence(captions, lengths)[0]
             score, _ = model(imgs, input_captions, lengths)
             loss = criterion(score, target_captions)
             loss.backward()
             optimizer.step()
-            loss_meter.add(loss.data[0])
+            loss_meter.add(loss.item())
 
             # 可视化
             if (ii + 1) % opt.plot_every == 0:

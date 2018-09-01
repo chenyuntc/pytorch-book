@@ -1,7 +1,6 @@
 # coding:utf8
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 import torch.nn.functional as F
 
 
@@ -20,7 +19,6 @@ class PoetryModel(nn.Module):
             #  c_0 = 0.01*torch.Tensor(2, batch_size, self.hidden_dim).normal_().cuda()
             h_0 = input.data.new(2, batch_size, self.hidden_dim).fill_(0).float()
             c_0 = input.data.new(2, batch_size, self.hidden_dim).fill_(0).float()
-            h_0, c_0 = Variable(h_0), Variable(c_0)
         else:
             h_0, c_0 = hidden
         # size: (seq_len,batch_size,embeding_dim)

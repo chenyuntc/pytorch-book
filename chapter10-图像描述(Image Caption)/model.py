@@ -53,7 +53,7 @@ class CaptionModel(nn.Module):
                                    length_normalization_factor=length_normalization_factor)
         if next(self.parameters()).is_cuda:
             img = img.cuda()
-        img = t.autograd.Variable(img.unsqueeze(0), volatile=True)
+        img =img.unsqueeze(0)
         img = self.fc(img).unsqueeze(0)
         sentences, score = cap_gen.beam_search(img)
         sentences = [' '.join([self.ix2word[idx] for idx in sent])

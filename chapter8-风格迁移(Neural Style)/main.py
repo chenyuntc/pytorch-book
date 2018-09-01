@@ -8,7 +8,6 @@ from torch.utils import data
 from transformer_net import TransformerNet
 import utils
 from PackedVGG import Vgg16
-from torch.autograd import Variable
 from torch.nn import functional as F
 import tqdm
 import os
@@ -47,12 +46,13 @@ def train(**kwargs):
     opt = Config()
     for k_, v_ in kwargs.items():
         setattr(opt, k_, v_)
-
+    
+    device=t.device('cuda') if opt.use_gpu else t.device('cpu')
     vis = utils.Visualizer(opt.env)
 
     # 数据加载
     transfroms = tv.transforms.Compose([
-        tv.transforms.Scale(opt.image_size),
+        tv.transforms.Resize(opt.image_size),
         tv.transforms.CenterCrop(opt.image_size),
         tv.transforms.ToTensor(),
         tv.transforms.Lambda(lambda x: x * 255)
@@ -64,26 +64,25 @@ def train(**kwargs):
     transformer = TransformerNet()
     if opt.model_path:
         transformer.load_state_dict(t.load(opt.model_path, map_location=lambda _s, _: _s))
+    transformer.to(device)
 
     # 损失网络 Vgg16
     vgg = Vgg16().eval()
+    vgg.to(device)
 
     # 优化器
     optimizer = t.optim.Adam(transformer.parameters(), opt.lr)
 
     # 获取风格图片的数据
     style = utils.get_style_data(opt.style_path)
-    vis.img('style', (style[0] * 0.225 + 0.45).clamp(min=0, max=1))
+    vis.img('style', (style.data[0] * 0.225 + 0.45).clamp(min=0, max=1))
+    style = style.to(device)
 
-    if opt.use_gpu:
-        transformer.cuda()
-        style = style.cuda()
-        vgg.cuda()
 
     # 风格图片的gram矩阵
-    style_v = Variable(style, volatile=True)
-    features_style = vgg(style_v)
-    gram_style = [Variable(utils.gram_matrix(y.data)) for y in features_style]
+    with t.no_grad():
+        features_style = vgg(style)
+        gram_style = [utils.gram_matrix(y) for y in features_style]
 
     # 损失统计
     style_meter = tnt.meter.AverageValueMeter()
@@ -97,9 +96,7 @@ def train(**kwargs):
 
             # 训练
             optimizer.zero_grad()
-            if opt.use_gpu:
-                x = x.cuda()
-            x = Variable(x)
+            x = x.to(device)
             y = transformer(x)
             y = utils.normalize_batch(y)
             x = utils.normalize_batch(x)
@@ -121,8 +118,8 @@ def train(**kwargs):
             optimizer.step()
 
             # 损失平滑
-            content_meter.add(content_loss.data[0])
-            style_meter.add(style_loss.data[0])
+            content_meter.add(content_loss.item())
+            style_meter.add(style_loss.item())
 
             if (ii + 1) % opt.plot_every == 0:
                 if os.path.exists(opt.debug_file):
@@ -139,13 +136,14 @@ def train(**kwargs):
         vis.save([opt.env])
         t.save(transformer.state_dict(), 'checkpoints/%s_style.pth' % epoch)
 
-
+@t.no_grad()
 def stylize(**kwargs):
     opt = Config()
 
     for k_, v_ in kwargs.items():
         setattr(opt, k_, v_)
-
+    device=t.device('cuda') if opt.use_gpu else t.device('cpu')
+    
     # 图片处理
     content_image = tv.datasets.folder.default_loader(opt.content_path)
     content_transform = tv.transforms.Compose([
@@ -153,16 +151,12 @@ def stylize(**kwargs):
         tv.transforms.Lambda(lambda x: x.mul(255))
     ])
     content_image = content_transform(content_image)
-    content_image = content_image.unsqueeze(0)
-    content_image = Variable(content_image, volatile=True)
+    content_image = content_image.unsqueeze(0).to(device).detach()
 
     # 模型
     style_model = TransformerNet().eval()
     style_model.load_state_dict(t.load(opt.model_path, map_location=lambda _s, _: _s))
-
-    if opt.use_gpu:
-        content_image = content_image.cuda()
-        style_model.cuda()
+    style_model.to(device)
 
     # 风格迁移与保存
     output = style_model(content_image)

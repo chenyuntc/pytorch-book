@@ -30,7 +30,7 @@ class Visualizer():
 
     def __init__(self, env='default', **kwargs):
         import visdom
-        self.vis = visdom.Visdom(env=env, **kwargs)
+        self.vis = visdom.Visdom(env=env, use_incoming_socket=False, **kwargs)
 
         # 画的第几个数，相当于横座标
         # 保存（’loss',23） 即loss的第23个点
@@ -41,7 +41,7 @@ class Visualizer():
         """
         修改visdom的配置
         """
-        self.vis = visdom.Visdom(env=env, **kwargs)
+        self.vis = visdom.Visdom(env=env,use_incoming_socket=False,  **kwargs)
         return self
 
     def plot_many(self, d):
@@ -129,6 +129,6 @@ def normalize_batch(batch):
     """
     mean = batch.data.new(IMAGENET_MEAN).view(1, -1, 1, 1)
     std = batch.data.new(IMAGENET_STD).view(1, -1, 1, 1)
-    mean = t.autograd.Variable(mean.expand_as(batch.data))
-    std = t.autograd.Variable(std.expand_as(batch.data))
+    mean = (mean.expand_as(batch.data))
+    std = (std.expand_as(batch.data))
     return (batch / 255.0 - mean) / std

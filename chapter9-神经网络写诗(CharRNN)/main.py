@@ -4,7 +4,6 @@ import torch as t
 from data import get_data
 from model import PoetryModel
 from torch import nn
-from torch.autograd import Variable
 from utils import Visualizer
 import tqdm
 from torchnet import meter
@@ -45,29 +44,30 @@ def generate(model, start_words, ix2word, word2ix, prefix_words=None):
     比如start_words 为 春江潮水连海平，可以生成：
 
     """
+    
     results = list(start_words)
     start_word_len = len(start_words)
     # 手动设置第一个词为<START>
-    input = Variable(t.Tensor([word2ix['<START>']]).view(1, 1).long())
+    input = t.Tensor([word2ix['<START>']]).view(1, 1).long()
     if opt.use_gpu: input = input.cuda()
     hidden = None
 
     if prefix_words:
         for word in prefix_words:
             output, hidden = model(input, hidden)
-            input = Variable(input.data.new([word2ix[word]])).view(1, 1)
+            input = input.data.new([word2ix[word]]).view(1, 1)
 
     for i in range(opt.max_gen_len):
         output, hidden = model(input, hidden)
 
         if i < start_word_len:
             w = results[i]
-            input = Variable(input.data.new([word2ix[w]])).view(1, 1)
+            input = input.data.new([word2ix[w]]).view(1, 1)
         else:
             top_index = output.data[0].topk(1)[1][0]
             w = ix2word[top_index]
             results.append(w)
-            input = Variable(input.data.new([top_index])).view(1, 1)
+            input = input.data.new([top_index]).view(1, 1)
         if w == '<EOP>':
             del results[-1]
             break
@@ -86,7 +86,7 @@ def gen_acrostic(model, start_words, ix2word, word2ix, prefix_words=None):
     """
     results = []
     start_word_len = len(start_words)
-    input = Variable(t.Tensor([word2ix['<START>']]).view(1, 1).long())
+    input = (t.Tensor([word2ix['<START>']]).view(1, 1).long())
     if opt.use_gpu: input = input.cuda()
     hidden = None
 
@@ -97,7 +97,7 @@ def gen_acrostic(model, start_words, ix2word, word2ix, prefix_words=None):
     if prefix_words:
         for word in prefix_words:
             output, hidden = model(input, hidden)
-            input = Variable(input.data.new([word2ix[word]])).view(1, 1)
+            input = (input.data.new([word2ix[word]])).view(1, 1)
 
     for i in range(opt.max_gen_len):
         output, hidden = model(input, hidden)
@@ -114,10 +114,10 @@ def gen_acrostic(model, start_words, ix2word, word2ix, prefix_words=None):
                 # 把藏头的词作为输入送入模型
                 w = start_words[index]
                 index += 1
-                input = Variable(input.data.new([word2ix[w]])).view(1, 1)
+                input = (input.data.new([word2ix[w]])).view(1, 1)
         else:
             # 否则的话，把上一次预测是词作为下一个词输入
-            input = Variable(input.data.new([word2ix[w]])).view(1, 1)
+            input = (input.data.new([word2ix[w]])).view(1, 1)
         results.append(w)
         pre_word = w
     return results
@@ -127,6 +127,8 @@ def train(**kwargs):
     for k, v in kwargs.items():
         setattr(opt, k, v)
 
+    opt.device=t.device('cuda') if opt.use_gpu else t.device('cpu')
+    device = opt.device
     vis = Visualizer(env=opt.env)
 
     # 获取数据
@@ -141,30 +143,26 @@ def train(**kwargs):
     model = PoetryModel(len(word2ix), 128, 256)
     optimizer = t.optim.Adam(model.parameters(), lr=opt.lr)
     criterion = nn.CrossEntropyLoss()
-
     if opt.model_path:
         model.load_state_dict(t.load(opt.model_path))
+    model.to(device)
 
-    if opt.use_gpu:
-        model.cuda()
-        criterion.cuda()
     loss_meter = meter.AverageValueMeter()
-
     for epoch in range(opt.epoch):
         loss_meter.reset()
         for ii, data_ in tqdm.tqdm(enumerate(dataloader)):
 
             # 训练
             data_ = data_.long().transpose(1, 0).contiguous()
-            if opt.use_gpu: data_ = data_.cuda()
+            data_ = data_.to(device)
             optimizer.zero_grad()
-            input_, target = Variable(data_[:-1, :]), Variable(data_[1:, :])
+            input_, target = data_[:-1, :], data_[1:, :]
             output, _ = model(input_)
             loss = criterion(output, target.view(-1))
             loss.backward()
             optimizer.step()
 
-            loss_meter.add(loss.data[0])
+            loss_meter.add(loss.item())
 
             # 可视化
             if (1 + ii) % opt.plot_every == 0:
@@ -176,7 +174,7 @@ def train(**kwargs):
 
                 # 诗歌原文
                 poetrys = [[ix2word[_word] for _word in data_[:, _iii]]
-                           for _iii in range(data_.size(1))][:16]
+                           for _iii in range(data_.shape[1])][:16]
                 vis.text('</br>'.join([''.join(poetry) for poetry in poetrys]), win=u'origin_poem')
 
                 gen_poetries = []
@@ -204,6 +202,8 @@ def gen(**kwargs):
 
     if opt.use_gpu:
         model.cuda()
+
+    # python2和python3 字符串兼容
     if sys.version_info.major == 3:
         if opt.start_words.isprintable():
             start_words = opt.start_words

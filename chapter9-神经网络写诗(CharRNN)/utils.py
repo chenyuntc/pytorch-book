@@ -14,7 +14,7 @@ class Visualizer():
 
     def __init__(self, env='default', **kwargs):
         import visdom
-        self.vis = visdom.Visdom(env=env, **kwargs)
+        self.vis = visdom.Visdom(env=env, use_incoming_socket=False, **kwargs)
 
         # 画的第几个数，相当于横座标
         # 保存（’loss',23） 即loss的第23个点
@@ -25,7 +25,7 @@ class Visualizer():
         """
         修改visdom的配置
         """
-        self.vis = visdom.Visdom(env=env, **kwargs)
+        self.vis = visdom.Visdom(env=env,use_incoming_socket=False, **kwargs)
         return self
 
     def plot_many(self, d):

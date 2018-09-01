@@ -11,7 +11,7 @@ class Visualizer(object):
     """
 
     def __init__(self, env='default', **kwargs):
-        self.vis = visdom.Visdom(env=env, **kwargs)
+        self.vis = visdom.Visdom(env=env,use_incoming_socket=False, **kwargs)
 
         # 画的第几个数，相当于横座标
         # 保存（’loss',23） 即loss的第23个点

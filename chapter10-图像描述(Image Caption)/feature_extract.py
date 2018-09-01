@@ -13,6 +13,7 @@ import os
 from PIL import Image
 import numpy as np
 
+t.set_grad_enabled(False)
 opt = Config()
 
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
@@ -24,7 +25,7 @@ class CaptionDataset(data.Dataset):
 
     def __init__(self, caption_data_path):
         self.transforms = tv.transforms.Compose([
-            tv.transforms.Scale(256),
+            tv.transforms.Resize(256),
             tv.transforms.CenterCrop(256),
             tv.transforms.ToTensor(),
             normalize
@@ -72,7 +73,6 @@ for ii, (imgs, indexs) in tqdm.tqdm(enumerate(dataloader)):
     # 确保序号没有对应错
     assert indexs[0] == batch_size * ii
     imgs = imgs.cuda()
-    imgs = Variable(imgs, volatile=True)
     features = resnet50(imgs)
     results[ii * batch_size:(ii + 1) * batch_size] = features.data.cpu()
 

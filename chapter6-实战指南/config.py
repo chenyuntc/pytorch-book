@@ -1,10 +1,11 @@
 # coding:utf8
 import warnings
-
+import torch as t
 
 class DefaultConfig(object):
     env = 'default'  # visdom 环境
-    model = 'ResNet34'  # 使用的模型，名字必须与models/__init__.py中的名字一致
+    vis_port =8097 # visdom 端口
+    model = 'SqueezeNet'  # 使用的模型，名字必须与models/__init__.py中的名字一致
 
     train_data_root = './data/train/'  # 训练集存放路径
     test_data_root = './data/test1'  # 测试集存放路径
@@ -24,21 +25,21 @@ class DefaultConfig(object):
     weight_decay = 0e-5  # 损失函数
 
 
-def parse(self, kwargs):
-    """
-    根据字典kwargs 更新 config参数
-    """
-    for k, v in kwargs.items():
-        if not hasattr(self, k):
-            warnings.warn("Warning: opt has not attribut %s" % k)
-        setattr(self, k, v)
-
-    print('user config:')
-    for k, v in self.__class__.__dict__.items():
-        if not k.startswith('__'):
-            print(k, getattr(self, k))
+    def _parse(self, kwargs):
+        """
+        根据字典kwargs 更新 config参数
+        """
+        for k, v in kwargs.items():
+            if not hasattr(self, k):
+                warnings.warn("Warning: opt has not attribut %s" % k)
+            setattr(self, k, v)
+        
+        opt.device = device=t.device('cuda') if opt.use_gpu else t.device('cpu')
 
 
-DefaultConfig.parse = parse
+        print('user config:')
+        for k, v in self.__class__.__dict__.items():
+            if not k.startswith('_'):
+                print(k, getattr(self, k))
+
 opt = DefaultConfig()
-# opt.parse = parse

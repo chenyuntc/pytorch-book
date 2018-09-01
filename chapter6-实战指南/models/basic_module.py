@@ -28,6 +28,9 @@ class BasicModule(t.nn.Module):
         t.save(self.state_dict(), name)
         return name
 
+    def get_optimizer(self, lr, weight_decay):
+        return t.optim.Adam(self.parameters(), lr=lr, weight_decay=weight_decay)
+
 
 class Flat(t.nn.Module):
     """
