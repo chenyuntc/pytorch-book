@@ -152,7 +152,7 @@ class CaptionGenerator(object):
         def get_topk_words(embeddings, state):
             output, new_states = self.rnn(embeddings, state)
             output = self.classifier(output.squeeze(0))
-            logprobs = log_softmax(output)
+            logprobs = log_softmax(output, dim=1)
             logprobs, words = logprobs.topk(self.beam_size, 1)
             return words.data, logprobs.data, new_states
 

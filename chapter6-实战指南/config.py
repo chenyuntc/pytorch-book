@@ -34,7 +34,7 @@ class DefaultConfig(object):
                 warnings.warn("Warning: opt has not attribut %s" % k)
             setattr(self, k, v)
         
-        opt.device = device=t.device('cuda') if opt.use_gpu else t.device('cpu')
+        opt.device =t.device('cuda') if opt.use_gpu else t.device('cpu')
 
 
         print('user config:')

@@ -2,7 +2,7 @@
 
 ## 1 下载数据
 
-本次实验的数据来自于[AI Challenger图像描述](https://challenger.ai/competition/caption/)。 请下载对应的训练数据。如果你只是想测试看看效果，可以跳过这一步。
+本次实验的数据来自于[AI Challenger图像描述](https://challenger.ai/competition/caption/)。 请下载对应的训练数据(ai_challenger_caption_train_20170902.zip)。如果你只是想测试看看效果，可以跳过这一步。 读者还可以从[MEGA](https://mega.nz/#!fP4TSJ6I!mgG_HSXqi1Kgg5gvwYArUnuRNgcDqpd8qoj09e0Yg10)下载数据。
 
 ## 2 环境配置
 
@@ -59,7 +59,7 @@ python main.py train
     # img_path='/mnt/ht/aichallenger/raw/ai_challenger_caption_train_20170902/caption_train_images_20170902/'
     img_feature_path = 'results.pth' # 所有图片的features,20w*2048的向量
     scale_size = 300
-    img_size = 256
+    img_size = 224
     batch_size=8
     shuffle = True
     num_workers = 4

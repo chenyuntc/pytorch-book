@@ -65,7 +65,7 @@ python  main.py gen  --model-path='checkpoints/tang_199.pth' \
        --start-words='深度学习' \
        --prefix-words='江流天地外，山色有无中。' \
        --acrostic=True\
-       --nouse-gpu  # 或者 --use-gpu=False
+       --nouse-gpu
 深居不可见，浩荡心亦同。度年一何远，宛转三千雄。学立万里外，诸夫四十功。习习非吾仕，所贵在其功。
 ```
 
@@ -82,15 +82,15 @@ python2 main.py gen  --model-path='model.pth'
 ### 兼容性测试
 train 
 - [x] GPU  
-- [x] CPU  
-- [x] Python2
+- [] CPU  
+- [] Python2
 - [x] Python3
 
 test: 
 
 - [x] GPU
 - [x] CPU
-- [x] Python2
+- [] Python2
 - [x] Python3
 
 

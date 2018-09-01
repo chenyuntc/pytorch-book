@@ -145,7 +145,7 @@ def train(**kwargs):
                 vis.plot('errord', errord_meter.value()[0])
                 vis.plot('errorg', errorg_meter.value()[0])
 
-        if epoch % opt.save_every == 0:
+        if (epoch+1) % opt.save_every == 0:
             # 保存模型、图片
             tv.utils.save_image(fix_fake_imgs.data[:64], '%s/%s.png' % (opt.save_path, epoch), normalize=True,
                                 range=(-1, 1))

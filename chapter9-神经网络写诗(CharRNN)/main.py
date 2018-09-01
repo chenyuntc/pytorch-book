@@ -64,7 +64,7 @@ def generate(model, start_words, ix2word, word2ix, prefix_words=None):
             w = results[i]
             input = input.data.new([word2ix[w]]).view(1, 1)
         else:
-            top_index = output.data[0].topk(1)[1][0]
+            top_index = output.data[0].topk(1)[1][0].item()
             w = ix2word[top_index]
             results.append(w)
             input = input.data.new([top_index]).view(1, 1)
@@ -101,7 +101,7 @@ def gen_acrostic(model, start_words, ix2word, word2ix, prefix_words=None):
 
     for i in range(opt.max_gen_len):
         output, hidden = model(input, hidden)
-        top_index = output.data[0].topk(1)[1][0]
+        top_index = output.data[0].topk(1)[1][0].item()
         w = ix2word[top_index]
 
         if (pre_word in {u'。', u'！', '<START>'}):
@@ -173,7 +173,7 @@ def train(**kwargs):
                 vis.plot('loss', loss_meter.value()[0])
 
                 # 诗歌原文
-                poetrys = [[ix2word[_word] for _word in data_[:, _iii]]
+                poetrys = [[ix2word[_word] for _word in data_[:, _iii].tolist()]
                            for _iii in range(data_.shape[1])][:16]
                 vis.text('</br>'.join([''.join(poetry) for poetry in poetrys]), win=u'origin_poem')
 

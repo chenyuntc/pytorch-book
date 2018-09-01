@@ -69,6 +69,8 @@ def train(**kwargs):
     # 损失网络 Vgg16
     vgg = Vgg16().eval()
     vgg.to(device)
+    for param in vgg.parameters():
+        param.requires_grad = False
 
     # 优化器
     optimizer = t.optim.Adam(transformer.parameters(), opt.lr)

@@ -37,7 +37,7 @@ Usage： python main.py FUNCTION --key=value,--key2=value2 ..
 
 - 训练
 ```bash
-python main.py train --nogpu --vis=False
+python main.py train --gpu --vis=False
 ```
 
 - 生成图片
@@ -94,13 +94,13 @@ python main.py generate --nogpu --vis=False \
 ### 兼容性测试
 train 
 - [x] GPU  
-- [x] CPU  
-- [x] Python2
+- [] CPU  
+- [] Python2
 - [x] Python3
 
 test: 
 
 - [x] GPU
 - [x] CPU
-- [x] Python2
+- [] Python2
 - [x] Python3

@@ -27,10 +27,10 @@ def test(**kwargs):
     for ii,(data,path) in tqdm(enumerate(test_dataloader)):
         input = data.to(opt.device)
         score = model(input)
-        probability = t.nn.functional.softmax(score)[:,0].detach().tolist()
+        probability = t.nn.functional.softmax(score,dim=1)[:,0].detach().tolist()
         # label = score.max(dim = 1)[1].detach().tolist()
         
-        batch_results = [(path_,probability_) for path_,probability_ in zip(path,probability) ]
+        batch_results = [(path_.item(),probability_) for path_,probability_ in zip(path,probability) ]
 
         results += batch_results
     write_csv(results,opt.result_file)
