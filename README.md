@@ -1,8 +1,13 @@
 这是书籍《深度学习框架PyTorch：入门与实践》的对应代码，但是也可以作为一个独立的PyTorch入门指南和教程。
 
 ## 更新说明
+Working on migration to Pytorch 1.0, stay tuned!
+
+
 已更新到**pytorch 0.4.1 (不是0.4.0)**
+
 已更新到**pytorch 0.4.1 (不是0.4.0)**
+
 已更新到**pytorch 0.4.1 (不是0.4.0)**
 
 当前版本的代码是基于pytorch 0.4.1， 如果想使用旧版的 请 `git checkout v0.2` 或者 `git checkout v0.3`。旧版代码有更好的python2/python3 兼容，CPU/GPU兼容测试。 新版的代码未经过完整测试，已在GPU和python3 下测试通过。但是理论上在python2和CPU上不应该有太多的问题。
