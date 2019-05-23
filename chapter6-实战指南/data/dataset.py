@@ -45,7 +45,7 @@ class DogCat(data.Dataset):
             else:
                 self.transforms = T.Compose([
                     T.Resize(256),
-                    T.RandomReSizedCrop(224),
+                    T.RandomResizedCrop(224),
                     T.RandomHorizontalFlip(),
                     T.ToTensor(),
                     normalize
