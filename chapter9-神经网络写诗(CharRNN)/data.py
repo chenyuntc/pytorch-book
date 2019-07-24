@@ -157,7 +157,7 @@ def get_data(opt):
     @return data: numpy数组，每一行是一首诗对应的字的下标
     """
     if os.path.exists(opt.pickle_path):
-        data = np.load(opt.pickle_path)
+        data = np.load(opt.pickle_path, allow_pickle=True)
         data, word2ix, ix2word = data['data'], data['word2ix'].item(), data['ix2word'].item()
         return data, word2ix, ix2word
 
