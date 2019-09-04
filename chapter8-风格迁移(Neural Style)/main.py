@@ -38,7 +38,7 @@ class Config(object):
     model_path = None  # 预训练模型的路径
     debug_file = '/tmp/debugnn'  # touch $debug_fie 进入调试模式
 
-    content_path = 'input.png'  # 需要进行分割迁移的图片
+    content_path = 'input.png'  # 需要进行风格迁移的图片
     result_path = 'output.png'  # 风格迁移结果的保存路径
 
 
