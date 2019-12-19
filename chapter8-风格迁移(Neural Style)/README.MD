@@ -33,7 +33,7 @@ python main.py train --use-gpu --data-root=data --batch-size=2
 
 - 生成图片
 
-读者可以[点此](http://pytorch-1252820389.cosbj.myqcloud.com/transformer.pth)下载预训练的模型`transformer.pth`，
+读者可以[点此](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/transformer.pth)下载预训练的模型`transformer.pth`，
 建议下载一张高清的图片，这样风格迁移的效果会比较好。
 ```bash
 python main.py stylize  --model-path='transformer.pth' \

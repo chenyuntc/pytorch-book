@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ## 3 数据预处理
 ### 3.1 标记文件的预处理（对人工描述的预处理）
-可以跳过这一步，直接下载预处理好的[caption.pth](http://pytorch-1252820389.cosbj.myqcloud.com/caption.pth)
+可以跳过这一步，直接下载预处理好的[caption.pth](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/caption.pth)
 
 当然，你也可以自行进行处理，运行 
 ```Bash
@@ -81,7 +81,7 @@ python main.py train
 ```
 
 ### 测试&Demo
-下载[预训练好的模型](http://pytorch-1252820389.file.myqcloud.com/caption_0914_1947), 或者使用你自己训练好的模型
+下载[预训练好的模型](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/caption_0914_1947), 或者使用你自己训练好的模型
 
 参照 [demo.ipynb](demo.ipynb),查看效果。
 

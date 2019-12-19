@@ -1,6 +1,6 @@
 这是电子工业出版社的《深度学习框架PyTorch：入门与实践》第九章的配套代码，利用PyTorch实现了CharRNN用以写唐诗。
 
-本次实验的数据来自于[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)。但是作者已经进行处理成二进制文件`tang.npz`，可以直接使用。读者可以[点此](http://pytorch-1252820389.cosbj.myqcloud.com/tang.npz)下载`tang.npz`
+本次实验的数据来自于[chinese-poetry](https://github.com/chinese-poetry/chinese-poetry)。但是作者已经进行处理成二进制文件`tang.npz`，可以直接使用。读者可以[点此](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/tang.npz)下载`tang.npz`
 
 ## 环境配置
 - 安装[PyTorch](http://pytorch.org)
@@ -55,7 +55,7 @@ python main.py train --plot-every=150\
 
 ```
 ## 生成诗歌
-作者提供了预训练好的模型，可以[点此](http://pytorch-1252820389.cosbj.myqcloud.com/tang_199.pth)下载`tang_199.pth`，用以生成诗歌
+作者提供了预训练好的模型，可以[点此](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/tang_199.pth)下载`tang_199.pth`，用以生成诗歌
 
 生成藏头诗的命令如下：
 

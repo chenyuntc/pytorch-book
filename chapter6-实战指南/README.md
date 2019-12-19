@@ -6,7 +6,7 @@
 
 
 ## 数据下载
-- 从[kaggle比赛官网](https://www.kaggle.com/c/dogs-vs-cats/data) 下载所需的数据；或者直接从此下载[训练集](http://pytorch-1252820389.file.myqcloud.com/data/dogcat/train.zip)和[测试集](http://pytorch-1252820389.file.myqcloud.com/data/dogcat/test1.zip)
+- 从[kaggle比赛官网](https://www.kaggle.com/c/dogs-vs-cats/data) 下载所需的数据；或者直接从此下载[训练集](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/data/dogcat/train.zip)和[测试集](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/data/dogcat/test1.zip)
 - 解压并把训练集和测试集分别放在一个文件夹中
 
 

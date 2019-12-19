@@ -42,7 +42,7 @@ python main.py train --gpu --vis=False
 
 - 生成图片
 
-[点此](http://pytorch-1252820389.cosbj.myqcloud.com/netg_200.pth)可下载预训练好的生成模型，如果想要下载预训练的判别模型，请[点此](http://pytorch-1252820389.cosbj.myqcloud.com/netd_200.pth)
+[点此](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/netg_200.pth)可下载预训练好的生成模型，如果想要下载预训练的判别模型，请[点此](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/netd_200.pth)
 ```bash
 python main.py generate --nogpu --vis=False \
             --netd-path=checkpoints/netd_200.pth \
@@ -88,7 +88,7 @@ python main.py generate --nogpu --vis=False \
    
 ```
 生成的部分图片：
-![imgs](https://dn-cyfall.qbox.me/del/gan-results2.png)
+![imgs](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/imgs/gan-results.png)
 
 
 ### 兼容性测试
