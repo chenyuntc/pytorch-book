@@ -88,7 +88,7 @@ python main.py generate --nogpu --vis=False \
    
 ```
 生成的部分图片：
-![imgs](https://yun.sfo2.digitaloceanspaces.com/pytorch_book/pytorch_book/imgs/gan-results.png)
+![imgs](imgs/gan-results.png)
 
 
 ### 兼容性测试
