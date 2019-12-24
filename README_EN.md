@@ -1,4 +1,6 @@
 **The English Version of this book is still under construction.**
+
+
 This is the corresponding code of the book *PyTorch: Introduction and Practice*. It can be used as independent PyTorch tutorials without the book. It contains several interesting PyTorch Projects. The Code is currently on PyTorch 1.0, with both CPU/GPU and Python2/3 compatibility. 
 
 
@@ -35,13 +37,13 @@ It contains two parts:
 
 - [Chapter 7](chapter7-GAN生成动漫头像/): popular GAN for the readers, and guides you to implement an animate image generator from scratch.
 
-- [Chapter 8](chapter8-风格迁移\(Neural\ Style\)/): the knowledge of style transfer and guide you to implement the fast neural style, turning your photos into masterpieces.
+- [Chapter 8](chapter8-风格迁移(Neural%20Style)): the knowledge of style transfer and guide you to implement the fast neural style, turning your photos into masterpieces.
 
 - [Chapter 9](chapter9-神经网络写诗\(CharRNN\)/): the knowledge of natural language processing and CharRNN. By collecting tens of thousands of Tang poems, you can train a small network that can write poems.
 
-- [Chapter 10](chapter10-图像描述\(Image Caption\)/): Knowledge of image caption and takes the data of AI Challenger competition as an example to guide you to implement a small program that can carry out simple image description.
+- [Chapter 10](chapter10-图像描述(Image%20Caption)/): Knowledge of image caption and takes the data of AI Challenger competition as an example to guide you to implement a small program that can carry out simple image description.
 
-- [Chapter 11](chapter11-语音识别(LSTM-CTC)): (*new, experimental**) speech recognition mainly written by [diamondfan](https://github.com/diamondfan).
+- [Chapter 11](chapter11-语音识别\(LSTM-CTC\)): (*new, experimental**) speech recognition mainly written by [diamondfan](https://github.com/diamondfan).
 
 
 
