@@ -70,10 +70,11 @@ Available args:
 ```
 
 Examples:
+
 ![imgs](neural-style-results.png)
 
 
-To train more styles, try different by `--style-path=mystyle.png`
+To train more styles, try different style images by `--style-path=mystyle.png`
 
 ### Code Compatibility
 train 
