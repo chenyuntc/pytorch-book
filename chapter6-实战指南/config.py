@@ -36,9 +36,9 @@ class DefaultConfig(object):
         
         opt.device =t.device('cuda') if opt.use_gpu else t.device('cpu')
 
-
+        # 不知道这样子好用不，就是突然发现可以这么用，因为我想的是之前那种方法只能获取类的属性，如果对象的属性发生改变，是print不出来的，所以想着这种方法应该可以
         print('user config:')
-        for k, v in self.__class__.__dict__.items():
+        for k in dir(self):
             if not k.startswith('_'):
                 print(k, getattr(self, k))
 
