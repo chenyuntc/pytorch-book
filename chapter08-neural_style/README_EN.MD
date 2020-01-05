@@ -1,3 +1,5 @@
+## [中文版本](README.MD)
+
 Code for  *PyTorch: Introduction and Practice*, chapter-8 fast neural style.
 
 ## Env Setup
@@ -79,8 +81,8 @@ To train more styles, try different style images by `--style-path=mystyle.png`
 ### Code Compatibility
 train 
 - [x] GPU  
-- [] CPU 
-- [] Python2
+- [ ] CPU 
+- [ ] Python2
 - [x] Python3
 
 test: 
