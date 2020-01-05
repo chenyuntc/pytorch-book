@@ -11,7 +11,7 @@ class TransformerNet(nn.Module):
     def __init__(self):
         super(TransformerNet, self).__init__()
 
-        # 下卷积层
+        # Down sample layers
         self.initial_layers = nn.Sequential(
             ConvLayer(3, 32, kernel_size=9, stride=1),
             nn.InstanceNorm2d(32, affine=True),
@@ -24,7 +24,7 @@ class TransformerNet(nn.Module):
             nn.ReLU(True),
         )
 
-        # Residual layers(残差层)
+        # Residual layers
         self.res_layers = nn.Sequential(
             ResidualBlock(128),
             ResidualBlock(128),
@@ -33,7 +33,7 @@ class TransformerNet(nn.Module):
             ResidualBlock(128)
         )
 
-        # Upsampling Layers(上卷积层)
+        # Upsampling Layers
         self.upsample_layers = nn.Sequential(
             UpsampleConvLayer(128, 64, kernel_size=3, stride=1, upsample=2),
             nn.InstanceNorm2d(64, affine=True),
@@ -54,7 +54,6 @@ class TransformerNet(nn.Module):
 class ConvLayer(nn.Module):
     """
     add ReflectionPad for Conv
-    默认的卷积的padding操作是补0，这里使用边界反射填充
     """
 
     def __init__(self, in_channels, out_channels, kernel_size, stride):
@@ -71,8 +70,8 @@ class ConvLayer(nn.Module):
 
 class UpsampleConvLayer(nn.Module):
     """UpsampleConvLayer
-    默认的卷积的padding操作是补0，这里使用边界反射填充
-    先上采样，然后做一个卷积(Conv2d)，而不是采用ConvTranspose2d，这种效果更好，参见
+    instead of ConvTranspose2d, we do UpSample + Conv2d
+    see ref for why.
     ref: http://distill.pub/2016/deconv-checkerboard/
     """
 

@@ -9,7 +9,8 @@ class Vgg16(torch.nn.Module):
     def __init__(self):
         super(Vgg16, self).__init__()
         features = list(vgg16(pretrained=True).features)[:23]
-        # features的第3，8，15，22层分别是: relu1_2,relu2_2,relu3_3,relu4_3
+        # the 3rd, 8th, 15th and 22nd layer of \ 
+        # self.features are: relu1_2,relu2_2,relu3_3,relu4_3
         self.features = nn.ModuleList(features).eval()
 
     def forward(self, x):

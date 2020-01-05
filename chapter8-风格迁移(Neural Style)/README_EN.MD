@@ -18,7 +18,7 @@ data
 ```
 
 ## Run
-If you would like to use `visdom`, `python -m visdom.server` to run the visdom server.
+If you would like to use `visdom`, `nohup python -m visdom.server &` to start the visdom server.
 
 Command:
 ```

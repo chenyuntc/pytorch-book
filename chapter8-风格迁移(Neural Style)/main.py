@@ -18,28 +18,30 @@ std = [0.229, 0.224, 0.225]
 
 
 class Config(object):
-    image_size = 256  # 图片大小
-    batch_size = 8
-    data_root = 'data/'  # 数据集存放路径：data/coco/a.jpg
-    num_workers = 4  # 多线程加载数据
-    use_gpu = True  # 使用GPU
+    # General Args
+    use_gpu = True
+    model_path = None # pretrain model path (for resume training or test)
+    
+    # Train Args
+    image_size = 256 # image crop_size for training
+    batch_size = 8  
+    data_root = 'data/' # dataset root：$data_root/coco/a.jpg
+    num_workers = 4 # dataloader num of workers
+    
+    lr = 1e-3
+    epoches = 2 # total epoch to train
+    content_weight = 1e5 # weight of content_loss  
+    style_weight = 1e10 # weight of style_loss
 
-    style_path = 'style.jpg'  # 风格图片存放路径
-    lr = 1e-3  # 学习率
+    style_path= 'style.jpg' # style image path
+    env = 'neural-style' # visdom env
+    plot_every = 10 # visualize in visdom for every 10 batch
 
-    env = 'neural-style'  # visdom env
-    plot_every = 10  # 每10个batch可视化一次
+    debug_file = '/tmp/debugnn' # touch $debug_fie to interrupt and enter ipdb 
 
-    epoches = 2  # 训练epoch
-
-    content_weight = 1e5  # content_loss 的权重
-    style_weight = 1e10  # style_loss的权重
-
-    model_path = None  # 预训练模型的路径
-    debug_file = '/tmp/debugnn'  # touch $debug_fie 进入调试模式
-
-    content_path = 'input.png'  # 需要进行风格迁移的图片
-    result_path = 'output.png'  # 风格迁移结果的保存路径
+    # Test Args
+    content_path = 'input.png' # input file to do style transfer [for test]
+    result_path = 'output.png' # style transfer result [for test]
 
 
 def train(**kwargs):
@@ -50,7 +52,7 @@ def train(**kwargs):
     device=t.device('cuda') if opt.use_gpu else t.device('cpu')
     vis = utils.Visualizer(opt.env)
 
-    # 数据加载
+    # Data loading
     transfroms = tv.transforms.Compose([
         tv.transforms.Resize(opt.image_size),
         tv.transforms.CenterCrop(opt.image_size),
@@ -60,33 +62,33 @@ def train(**kwargs):
     dataset = tv.datasets.ImageFolder(opt.data_root, transfroms)
     dataloader = data.DataLoader(dataset, opt.batch_size)
 
-    # 转换网络
+    # style transformer network
     transformer = TransformerNet()
     if opt.model_path:
         transformer.load_state_dict(t.load(opt.model_path, map_location=lambda _s, _: _s))
     transformer.to(device)
 
-    # 损失网络 Vgg16
+    # Vgg16 for Perceptual Loss
     vgg = Vgg16().eval()
     vgg.to(device)
     for param in vgg.parameters():
         param.requires_grad = False
 
-    # 优化器
+    # Optimizer
     optimizer = t.optim.Adam(transformer.parameters(), opt.lr)
 
-    # 获取风格图片的数据
+    # Get style image
     style = utils.get_style_data(opt.style_path)
     vis.img('style', (style.data[0] * 0.225 + 0.45).clamp(min=0, max=1))
     style = style.to(device)
 
 
-    # 风格图片的gram矩阵
+    # gram matrix for style image
     with t.no_grad():
         features_style = vgg(style)
         gram_style = [utils.gram_matrix(y) for y in features_style]
 
-    # 损失统计
+    # Loss meter
     style_meter = tnt.meter.AverageValueMeter()
     content_meter = tnt.meter.AverageValueMeter()
 
@@ -96,7 +98,7 @@ def train(**kwargs):
 
         for ii, (x, _) in tqdm.tqdm(enumerate(dataloader)):
 
-            # 训练
+            # Train
             optimizer.zero_grad()
             x = x.to(device)
             y = transformer(x)
@@ -119,7 +121,7 @@ def train(**kwargs):
             total_loss.backward()
             optimizer.step()
 
-            # 损失平滑
+            # Loss smooth for visualization
             content_meter.add(content_loss.item())
             style_meter.add(style_loss.item())
 
@@ -127,26 +129,29 @@ def train(**kwargs):
                 if os.path.exists(opt.debug_file):
                     ipdb.set_trace()
 
-                # 可视化
+                # visualization
                 vis.plot('content_loss', content_meter.value()[0])
                 vis.plot('style_loss', style_meter.value()[0])
-                # 因为x和y经过标准化处理(utils.normalize_batch)，所以需要将它们还原
+                # denorm input/output, since we have applied (utils.normalize_batch)
                 vis.img('output', (y.data.cpu()[0] * 0.225 + 0.45).clamp(min=0, max=1))
                 vis.img('input', (x.data.cpu()[0] * 0.225 + 0.45).clamp(min=0, max=1))
 
-        # 保存visdom和模型
+        # save checkpoint
         vis.save([opt.env])
         t.save(transformer.state_dict(), 'checkpoints/%s_style.pth' % epoch)
 
 @t.no_grad()
 def stylize(**kwargs):
+    """
+    perform style transfer
+    """
     opt = Config()
 
     for k_, v_ in kwargs.items():
         setattr(opt, k_, v_)
     device=t.device('cuda') if opt.use_gpu else t.device('cpu')
     
-    # 图片处理
+    # input image preprocess
     content_image = tv.datasets.folder.default_loader(opt.content_path)
     content_transform = tv.transforms.Compose([
         tv.transforms.ToTensor(),
@@ -155,12 +160,12 @@ def stylize(**kwargs):
     content_image = content_transform(content_image)
     content_image = content_image.unsqueeze(0).to(device).detach()
 
-    # 模型
+    # model setup
     style_model = TransformerNet().eval()
     style_model.load_state_dict(t.load(opt.model_path, map_location=lambda _s, _: _s))
     style_model.to(device)
 
-    # 风格迁移与保存
+    # style transfer and save output
     output = style_model(content_image)
     output_data = output.cpu().data[0]
     tv.utils.save_image(((output_data / 255)).clamp(min=0, max=1), opt.result_path)

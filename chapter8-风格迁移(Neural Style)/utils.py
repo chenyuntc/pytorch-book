@@ -12,8 +12,8 @@ IMAGENET_STD = [0.229, 0.224, 0.225]
 
 def gram_matrix(y):
     """
-    输入 b,c,h,w
-    输出 b,c,c
+    Input shape: b,c,h,w
+    Output shape: b,c,c
     """
     (b, ch, h, w) = y.size()
     features = y.view(b, ch, w * h)
@@ -24,29 +24,26 @@ def gram_matrix(y):
 
 class Visualizer():
     """
-    封装了visdom的基本操作，但是你仍然可以通过`self.vis.function`
-    调用原生的visdom接口
+    wrapper on visdom, but you may still call native visdom by `self.vis.function`
     """
 
     def __init__(self, env='default', **kwargs):
         import visdom
         self.vis = visdom.Visdom(env=env, use_incoming_socket=False, **kwargs)
 
-        # 画的第几个数，相当于横座标
-        # 保存（’loss',23） 即loss的第23个点
         self.index = {}
         self.log_text = ''
 
     def reinit(self, env='default', **kwargs):
         """
-        修改visdom的配置
+        
         """
         self.vis = visdom.Visdom(env=env,use_incoming_socket=False,  **kwargs)
         return self
 
     def plot_many(self, d):
         """
-        一次plot多个
+        plot multi values in a time
         @params d: dict (name,value) i.e. ('loss',0.11)
         """
         for k, v in d.items():
@@ -86,8 +83,8 @@ class Visualizer():
 
     def img_grid(self, name, input_3d):
         """
-        一个batch的图片转成一个网格图，i.e. input（36，64，64）
-        会变成 6*6 的网格图，每个格子大小64*64
+        convert batch images to grid of images
+        i.e. input（36，64，64） ->  6*6 grid，each grid is an image of size 64*64
         """
         self.img(name, tv.utils.make_grid(
             input_3d.cpu()[0].unsqueeze(1).clamp(max=1, min=0)))
@@ -108,9 +105,8 @@ class Visualizer():
 
 def get_style_data(path):
     """
-    加载风格图片，
-    输入： path， 文件路径
-    返回： 形状 1*c*h*w， 分布 -2~2
+    load style image，
+    Return： tensor shape 1*c*h*w, normalized
     """
     style_transform = tv.transforms.Compose([
         tv.transforms.ToTensor(),
@@ -124,8 +120,8 @@ def get_style_data(path):
 
 def normalize_batch(batch):
     """
-    输入: b,ch,h,w  0~255
-    输出: b,ch,h,w  -2~2
+    Input: b,ch,h,w  0~255
+    Output: b,ch,h,w  -2~2
     """
     mean = batch.data.new(IMAGENET_MEAN).view(1, -1, 1, 1)
     std = batch.data.new(IMAGENET_STD).view(1, -1, 1, 1)
